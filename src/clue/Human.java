@@ -6,7 +6,7 @@
 package clue;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Scanner;
 import java.util.Set;
 
 
@@ -16,13 +16,28 @@ import java.util.Set;
  */
 public class Human extends Player{
  
+    private Scanner input;
+    
     public Human(String name, Set<MurderCard> mCards, Tile t, Game g){
         this.name = name;
         this.mCards = mCards;
         this.position = t;
         this.immunueToSuggestion = false;
+        Scanner input = new Scanner(System.in);
     }  
     
+    private int getInput (int maxVal){
+        int val= -1;
+        while(val<0||val>maxVal){
+            val = input.nextInt();
+            
+        }
+        return val;
+    }
+    
+    
+    
+    //Reaveling cards- if any matches, select card to reveal
     public MurderCard answerSuggestion(ArrayList<MurderCard> suggestion){
         ArrayList <MurderCard> matches = new ArrayList<>();
         for(MurderCard m:suggestion){
@@ -33,16 +48,20 @@ public class Human extends Player{
         if(matches.isEmpty()){
             return null;
         }
-            else
-            {
-                if(immunueToSuggestion){
-                    immunueToSuggestion = false;
+        else{
+            if(immunueToSuggestion){                   
+                immunueToSuggestion = false;
                     return null;
                 } 
                 else
                 {
                     //return random match, can be choosen, but will be implemented later
-                    Collections.shuffle(matches);
+                    System.out.println("Cards matched with suggestion are:");
+                    for(int i = 0; i<matches.size(); i++){
+                        System.out.println(i +"  "+matches.get(i).name + " "+ matches.get(i).getClass().getName());
+                    }
+                    System.out.println("What card do you want to reveal");
+                    getInput(matches.size()-1);
                     return(matches.get(0));
             }
         }  
