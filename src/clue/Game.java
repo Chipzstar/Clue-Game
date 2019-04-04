@@ -10,8 +10,8 @@ import java.util.List;
 
 
 public class Game implements GameInterface {
-    Board b = null;
-    Dice d = null;
+    private Board b = null;
+    private Dice d = null;
     ArrayList<Player> playerList;
     List<MurderCard> solution;
     List<IntrigueCard> intrigueDeck;
