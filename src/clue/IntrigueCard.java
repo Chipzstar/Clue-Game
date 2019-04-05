@@ -9,28 +9,29 @@ package clue;
  * @author xxlig
  */
 class IntrigueCard {
-	public enum IntrigueCardType {
-		EXTRATURN("Extra Turn"), THROWAGAIN("Throw again"), TELEPORT("Teleport"), AVOIDSUGGESTION("Avoid Suggestion");
-		private String representation;
 
-		private IntrigueCardType(String s) {
-			this.representation = s;
-		}
+    public enum IntrigueCardType {
+        EXTRATURN("Extra Turn"), THROWAGAIN("Throw again"), TELEPORT("Teleport"), AVOIDSUGGESTION("Avoid Suggestion");
+        private String representation;
 
-		@Override
-		public String toString() {
-			return representation;
-		}
-	}
+        private IntrigueCardType(String s) {
+            this.representation = s;
+        }
 
-	private IntrigueCardType type;
+        @Override
+        public String toString() {
+            return representation;
+        }
+    }
 
-	public IntrigueCard(IntrigueCardType type) {
-		this.type = type;
-	}
+    private IntrigueCardType type;
 
-	public IntrigueCardType getType() {
-		return type;
-	}
+    public IntrigueCard(IntrigueCardType type) {
+        this.type = type;
+    }
+
+    public IntrigueCardType getType() {
+        return type;
+    }
 
 }

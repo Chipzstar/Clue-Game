@@ -34,9 +34,7 @@ public class Human extends Player{
         }
         return val;
     }
-    
-    
-    
+       
     //Reaveling cards- if any matches, select card to reveal
     public MurderCard answerSuggestion(ArrayList<MurderCard> suggestion){
         ArrayList <MurderCard> matches = new ArrayList<>();
