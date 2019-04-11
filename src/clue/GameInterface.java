@@ -15,7 +15,7 @@ public interface GameInterface {
     ArrayList<Player> playerList = null;
     List<MurderCard> solution = null;
     List<IntrigueCard> intrigueDeck = null;
-    int currentPlayer;
+    int currentPlayer = 0;
     /**
     *Game(config files)
     *
