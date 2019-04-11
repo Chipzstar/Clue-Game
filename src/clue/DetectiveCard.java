@@ -14,28 +14,28 @@ import java.util.HashMap;
  *
  * @author xxlig
  */
-class DetectiveCard {   
-        public enum Mark {
-            MARK("X"),BLANK("_");
-            private String representation;
+class DetectiveCard {
+    public enum Mark {
+        MARK("X"),BLANK("_");
+        private String representation;
 
-            private Mark(String s) {
-                this.representation = s;
-            }
-
-            @Override
-            public String toString() {
-                return representation;
-            }
+        private Mark(String s) {
+            this.representation = s;
         }
-        
-        HashMap<WeaponMCard,Mark> weapons;
-        HashMap<RoomMCard,Mark> rooms;
-        HashMap<CharacterMCard,Mark> characters;
-        
-        
+
+        @Override
+        public String toString() {
+            return representation;
+        }
+    }
+
+    HashMap<MurderCard,Mark> weapons;
+    HashMap<MurderCard,Mark> rooms;
+    HashMap<MurderCard,Mark> characters;
+
+
     public DetectiveCard(ArrayList<WeaponMCard> weapon, ArrayList<RoomMCard> room,
-       ArrayList<CharacterMCard> character){
+                         ArrayList<CharacterMCard> character){
         weapons = new HashMap<>();
         rooms = new HashMap<>();
         characters = new HashMap();
@@ -48,24 +48,24 @@ class DetectiveCard {
         for(CharacterMCard c: character){
             this.characters.put(c,Mark.BLANK);
         }
-            
-            
+
+
     }
-    
+
     public boolean mark(String s){
-        for(WeaponMCard w: weapons.keySet()){
+        for(MurderCard w: weapons.keySet()){
             if(s == w.getName()){
                 weapons.put(w, Mark.MARK);
                 return true;
             }
         }
-        for(RoomMCard r: rooms.keySet()){
+        for(MurderCard r: rooms.keySet()){
             if(s == r.getName()){
                 rooms.put(r, Mark.MARK);
                 return true;
             }
         }
-        for(CharacterMCard c: characters.keySet()){
+        for(MurderCard c: characters.keySet()){
             if(s == c.getName()){
                 characters.put(c, Mark.MARK);
                 return true;
@@ -73,21 +73,21 @@ class DetectiveCard {
         }
         return false;
     }
-    
+
     public boolean unmark(String s){
-        for(WeaponMCard w: weapons.keySet()){
+        for(MurderCard w: weapons.keySet()){
             if(s == w.getName()){
                 weapons.put(w, Mark.BLANK);
                 return true;
             }
         }
-        for(RoomMCard r: rooms.keySet()){
+        for(MurderCard r: rooms.keySet()){
             if(s == r.getName()){
                 rooms.put(r, Mark.BLANK);
                 return true;
             }
         }
-        for(CharacterMCard c: characters.keySet()){
+        for(MurderCard c: characters.keySet()){
             if(s == c.getName()){
                 characters.put(c, Mark.BLANK);
                 return true;
@@ -95,41 +95,33 @@ class DetectiveCard {
         }
         return false;
     }
-      
-    
-    public ArrayList<MurderCard> getSuggestion(ArrayList<String> items){
-        ArrayList<MurderCard> suggestion = new ArrayList<>();
-        for(WeaponMCard w: weapons.keySet()){
-            if(items.get(1) == w.getName()){
-                suggestion.add(w);
-                break;
-            }
-        }
-        for(RoomMCard r: rooms.keySet()){
-            if(items.get(2) == r.getName()){
-                suggestion.add(r);
-                break;
-            }
-        }
-        for(CharacterMCard c: characters.keySet()){
-            if(items.get(3) == c.getName()){
-                suggestion.add(c);
-                break;
-            }
-        }
-        if(suggestion.size()!=3){
-            System.out.println("ERROR");
-            return null;
-        }else{
-            return suggestion;
-        }
-            
+
+    public ArrayList<MurderCard> getWeaponMCards(){
+        return new ArrayList<MurderCard>(weapons.keySet());
     }
-    
-     public void cardToString(){
-         System.out.println(Arrays.asList(weapons));
-         System.out.println(Arrays.asList(rooms));
-         System.out.println(Arrays.asList(characters));         
-       
+
+    public ArrayList<MurderCard> getRoomMCards(){
+        return new ArrayList<MurderCard>(rooms.keySet());
+    }
+
+    public ArrayList<MurderCard> getCharacterMCards(){
+        return new ArrayList<MurderCard>(characters.keySet());
+    }
+
+    public MurderCard getRoomMCard (String s){
+        for(MurderCard r: rooms.keySet()){
+            if(r.name == s){
+                return r;
+            }
+        }
+        return null;
+    }
+
+
+    public void cardToString(){
+        System.out.println(Arrays.asList(weapons));
+        System.out.println(Arrays.asList(rooms));
+        System.out.println(Arrays.asList(characters));
+
     }
 }
