@@ -16,14 +16,23 @@ import java.util.Set;
  */
 class Player {
     protected String name;
-    protected Set <MurderCard> mCards;  
+    protected Set <MurderCard> mCards;
     protected Tile position;
     protected boolean immunueToSuggestion;
     protected Game g;
-    
-    public Tile getPosition(){return position;} 
-    
-    
+    protected DetectiveCard d;
+    public Tile getPosition(){return position;}
 
+    public void goToTile(Tile t){
+        this.position = t;
     }
+
+    //turnStart -> roll, stay or use shortcut
+
+    //roll -> move
+    //if in room -> make a suggestion?
+    //can make acusation
+
+
+}
 
