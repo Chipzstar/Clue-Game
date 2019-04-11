@@ -14,8 +14,8 @@ public interface GameInterface {
     Dice d = null;
     ArrayList<Player> playerList = null;
     List<MurderCard> solution = null;
-    List<IntrigueCard> intrigueDeck = null; 
-    
+    List<IntrigueCard> intrigueDeck = null;
+    int currentPlayer;
     /**
     *Game(config files)
     *
@@ -23,16 +23,16 @@ public interface GameInterface {
     *checks config file exist
     *reads config files
     *get data from files
-    *initialise objects and lists 
+    *initialise objects and lists
     *creates board as specified in config
     * -----------------------------------
     * -----------Game Start--------------
-    * ask for params from user 
+    * ask for params from user
     *(number of player, number of ai ect)
     * fill player list with corresponding objects
     * Game Start
     **/
-    
-    
-    
+
+
+
 }
