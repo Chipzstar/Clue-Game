@@ -20,7 +20,7 @@ class Player {
     protected Tile position;
     protected boolean immunueToSuggestion;
     protected Game g;
-    protected DetectiveCard d;
+    protected DetectiveCard dCard;
     public Tile getPosition(){return position;}
 
     public void goToTile(Tile t){

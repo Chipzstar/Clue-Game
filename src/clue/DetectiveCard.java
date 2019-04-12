@@ -48,8 +48,6 @@ class DetectiveCard {
         for(CharacterMCard c: character){
             this.characters.put(c,Mark.BLANK);
         }
-
-
     }
 
     public boolean mark(String s){

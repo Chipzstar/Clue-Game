@@ -6,13 +6,15 @@
 package clue;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 
 public class Game implements GameInterface {
-    private Board b = null;
-    private Dice d = null;
+    Board b = null;
+    Dice d = null;
     ArrayList<Player> playerList;
-    List<MurderCard> solution;
-    List<IntrigueCard> intrigueDeck;
+    LinkedList<MurderCard> solution;
+    LinkedList<IntrigueCard> intrigueDeck;
+    int currentPlayer;
 }
