@@ -67,6 +67,11 @@ class Board {
         return landable;
     }
 
+    /**
+     *
+     * @param s
+     * @return
+     */
     public HashMap<Integer,ArrayList<Tile>> getBFS(Tile s){
         HashMap<Integer,ArrayList<Tile>> hashMap = new HashMap<>();
         ArrayList<Tile> boardTiles = new ArrayList<>();
@@ -100,8 +105,4 @@ class Board {
         }
         return tilesInReach;
     }
-
-
-
-
 }

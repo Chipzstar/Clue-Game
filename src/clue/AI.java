@@ -14,12 +14,20 @@ import java.util.Set;
  * @author xxlig
  */
 public class AI extends Player{
-     public AI(String name, Set<MurderCard> mCards, Tile t, Game g){
+     public AI(String name, Set<MurderCard> mCards, Tile t, Game g, DetectiveCard d){
         this.name = name;
         this.mCards = mCards;
         this.position = t;
-        this.immunueToSuggestion = false;
-    }  
+        this.immuneToSuggestion = false;
+    }
+
+    public void rollDiceAndMove(){
+        int roll = this.g.d.roll();
+        ArrayList<Tile> moveTo = this.g.b.humanDiceRoll(roll, this.position);
+        for(int i=0; i < moveTo.size(); i++){
+            System.out.println(i +": "+moveTo.get(i).toString());
+        }
+    }
     
     public MurderCard answerSuggestion(ArrayList<MurderCard> suggestion){
         ArrayList <MurderCard> matches = new ArrayList<>();
@@ -33,8 +41,8 @@ public class AI extends Player{
         }
             else
             {
-                if(immunueToSuggestion){
-                    immunueToSuggestion = false;
+                if(immuneToSuggestion){
+                    immuneToSuggestion = false;
                     return null;
                 } 
                 else

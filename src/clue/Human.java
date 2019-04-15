@@ -31,7 +31,7 @@ public class Human extends Player{
         this.mCards = mCards;
         this.position = t;
         this.dCard = d;
-        this.immunueToSuggestion = false;
+        this.immuneToSuggestion = false;
         Scanner input = new Scanner(System.in);
     }
 
@@ -76,12 +76,11 @@ public class Human extends Player{
      */
     public ArrayList<MurderCard> makeSuggestion(){
         ArrayList<MurderCard> suggestion = new ArrayList<>();
-        ArrayList<MurderCard> temp = dCard.getWeaponMCards();
 
         //WEAPONS
-        System.out.println("Weapon");
+        ArrayList<MurderCard> temp = dCard.getWeaponMCards();
+        System.out.println("Select Weapon");
         displayDetectiveCardItems(temp);
-        System.out.println("Selection: ");
         suggestion.add(temp.get(getInput(temp.size()-1)));
 
         //ROOM - gets roomMCard of current room player is in
@@ -89,11 +88,10 @@ public class Human extends Player{
 
         //CHARACTERS
         temp = dCard.getCharacterMCards();
-        System.out.println("Character");
+        System.out.println("Select Character");
         displayDetectiveCardItems(temp);
-        System.out.println("Selection: ");
         suggestion.add(temp.get(getInput(temp.size()-1)));
-
+        
         return suggestion;
     }
 
@@ -107,21 +105,21 @@ public class Human extends Player{
 
         //WEAPONS
         temp = dCard.getWeaponMCards();
-        System.out.println("Weapon");
+        System.out.println("Select Weapon");
         displayDetectiveCardItems(temp);
         System.out.println("Selection: ");
         accusation.add(temp.get(getInput(temp.size()-1)));
 
         //ROOMS
         temp = dCard.getRoomMCards();
-        System.out.println("Room");
+        System.out.println("Select Room");
         displayDetectiveCardItems(temp);
         System.out.println("Selection: ");
         accusation.add(temp.get(getInput(temp.size()-1)));
 
         //CHARACTERS
         temp = dCard.getCharacterMCards();
-        System.out.println("Character");
+        System.out.println("Select Character");
         displayDetectiveCardItems(temp);
         System.out.println("Selection: ");
         accusation.add(temp.get(getInput(temp.size()-1)));
@@ -147,7 +145,7 @@ public class Human extends Player{
         this.g.intrigueDeck.offer(c);
         switch(c.getType()){
             case AVOIDSUGGESTION:
-                this.immunueToSuggestion = true;
+                this.immuneToSuggestion = true;
                 break;
             case EXTRATURN:
                 g.currentPlayer--;
@@ -184,8 +182,8 @@ public class Human extends Player{
             return null;
         }
         else{
-            if(immunueToSuggestion){
-                immunueToSuggestion = false;
+            if(immuneToSuggestion){
+                immuneToSuggestion = false;
                 return null;
             } else {
                 //return random match, can be choosen, but will be implemented later

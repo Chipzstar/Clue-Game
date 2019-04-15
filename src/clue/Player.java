@@ -18,10 +18,11 @@ class Player {
     protected String name;
     protected Set <MurderCard> mCards;
     protected Tile position;
-    protected boolean immunueToSuggestion;
+    protected boolean immuneToSuggestion;
     protected Game g;
     protected DetectiveCard dCard;
-    public Tile getPosition(){return position;}
+
+    public Tile getPosition(){ return position; }
 
     public void goToTile(Tile t){
         this.position = t;
