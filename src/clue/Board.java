@@ -25,7 +25,7 @@ class Board {
         int x = t.getCoords().x;
         int y = t.getCoords().y;
         if(t instanceof RoomTile){
-            if(!((RoomTile) t).getIsDoor()){
+            if(!((RoomTile) t).isDoor()){
                 adjTile.addAll(((RoomTile) t).getRoom().getDoors());
             }
         }
@@ -57,8 +57,8 @@ class Board {
     public boolean landableTile(Tile t){
         boolean landable = false;
         if(t instanceof RoomTile){
-            if(((RoomTile) t).getIsDoor()){
-                landable= true;
+            if(((RoomTile) t).isDoor()){
+                landable = true;
             }
         }
         else if(t instanceof Tile || t instanceof SpecialTile){
@@ -97,12 +97,24 @@ class Board {
         return hashMap;
     }
 
-    public ArrayList<Tile> humanDiceRoll(int value, Tile t){
-        HashMap<Integer,ArrayList<Tile>> hashMap = getBFS(t);
-        ArrayList<Tile> tilesInReach = new ArrayList<>();
-        for(Integer i = 1; i<= value;i++){
-            tilesInReach.addAll(hashMap.get(i));
-        }
+    public ArrayList<Tile> getReachableTiles(int value, Tile position){
+        HashMap<Integer,ArrayList<Tile>> hashMap = getBFS(position);
+        ArrayList<Tile> tilesInReach = hashMap.get(value);
         return tilesInReach;
+    }
+
+    public ArrayList<RoomTile> getReachableRooms(int value, Tile position){
+        HashMap<Integer,ArrayList<Tile>> hashMap = getBFS(position);
+        ArrayList<RoomTile> roomsInReach = new ArrayList<>();
+        for(Integer i = 1; i <= value;i++){
+            for(Tile t : hashMap.get(i)) {
+                if (t instanceof RoomTile) {
+                    if (((RoomTile) t).isDoor()) {
+                        roomsInReach.add((RoomTile) t);
+                    }
+                }
+            }
+        }
+        return roomsInReach;
     }
 }

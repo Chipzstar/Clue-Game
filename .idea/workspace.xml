@@ -2,14 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cc0c243a-69e7-4b8d-b3a1-04837bf2a019" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clue/AI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clue/AI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/clue/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clue/Board.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/clue/DetectiveCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clue/DetectiveCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clue/Dice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clue/Dice.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/clue/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clue/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clue/GameInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clue/GameInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/clue/Human.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clue/Human.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clue/MurderCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clue/MurderCard.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/clue/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clue/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/clue/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clue/Room.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clue/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clue/Tile.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -24,10 +29,22 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/clue/Human.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2567">
+              <caret line="159" column="39" selection-start-line="159" selection-start-column="39" selection-end-line="159" selection-end-column="39" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/clue/Board.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-833">
-              <caret line="15" column="6" selection-start-line="15" selection-start-column="6" selection-end-line="15" selection-end-column="6" />
+            <state relative-caret-position="1020">
+              <caret line="67" column="5" selection-start-line="67" selection-start-column="5" selection-end-line="67" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#355#356#0" expanded="true" />
@@ -40,39 +57,19 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/clue/Game.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="18" column="22" selection-start-line="18" selection-start-column="22" selection-end-line="18" selection-end-column="22" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/clue/Player.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="19" column="28" selection-start-line="19" selection-start-column="28" selection-end-line="19" selection-end-column="28" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/clue/IntrigueCard.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="15" selection-start-line="15" selection-end-line="15" />
+            <state relative-caret-position="119">
+              <caret line="13" column="19" selection-start-line="13" selection-start-column="19" selection-end-line="13" selection-end-column="19" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/clue/Human.java">
+        <entry file="file://$PROJECT_DIR$/src/clue/Player.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="100">
-              <caret line="69" column="65" lean-forward="true" selection-start-line="69" selection-start-column="65" selection-end-line="69" selection-end-column="65" />
+            <state relative-caret-position="323">
+              <caret line="23" column="41" lean-forward="true" selection-start-line="23" selection-start-column="41" selection-end-line="23" selection-end-column="41" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1505#1506#0" expanded="true" />
-                <element signature="e#1601#1602#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -81,26 +78,12 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/clue/AI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/clue/DetectiveCard.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="662">
-              <caret line="88" column="33" selection-start-line="88" selection-start-column="33" selection-end-line="88" selection-end-column="33" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/clue/GameInterface.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="21" column="41" selection-start-line="21" selection-start-column="41" selection-end-line="21" selection-end-column="41" />
+            <state relative-caret-position="2856">
+              <caret line="178" column="22" selection-start-line="178" selection-start-column="22" selection-end-line="178" selection-end-column="22" />
+              <folding>
+                <element signature="e#6029#6030#0" expanded="true" />
+                <element signature="e#6064#6065#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -108,8 +91,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/clue/Room.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="338">
-              <caret line="70" column="6" selection-start-line="70" selection-start-column="6" selection-end-line="70" selection-end-column="6" />
+            <state relative-caret-position="544">
+              <caret line="36" column="28" selection-start-line="36" selection-start-column="28" selection-end-line="36" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -117,8 +100,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/clue/Tile.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="559">
-              <caret line="46" column="4" lean-forward="true" selection-start-line="46" selection-start-column="4" selection-end-line="46" selection-end-column="4" />
+            <state relative-caret-position="259">
+              <caret line="36" column="54" selection-start-line="36" selection-start-column="54" selection-end-line="36" selection-end-column="54" />
             </state>
           </provider>
         </entry>
@@ -130,60 +113,63 @@
       <find>getIn</find>
       <find>d</find>
       <find>d.</find>
+      <find>immunueToSuggestion</find>
+      <find>moveToRoom</find>
+      <find>mCards</find>
+      <find>suggestion</find>
     </findStrings>
     <replaceStrings>
       <replace>dCard</replace>
       <replace>dCard.</replace>
+      <replace>immuneToSuggestion</replace>
+      <replace>accessibleRooms</replace>
+      <replace>accusation</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/clue/DetectiveCard.java" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/clue/Dice.java" />
         <option value="$PROJECT_DIR$/src/clue/IntrigueCard.java" />
-        <option value="$PROJECT_DIR$/src/clue/Tile.java" />
+        <option value="$PROJECT_DIR$/src/clue/Dice.java" />
         <option value="$PROJECT_DIR$/src/clue/GameInterface.java" />
-        <option value="$PROJECT_DIR$/src/clue/Player.java" />
-        <option value="$PROJECT_DIR$/src/clue/DetectiveCard.java" />
-        <option value="$PROJECT_DIR$/src/clue/Board.java" />
-        <option value="$PROJECT_DIR$/src/clue/Game.java" />
         <option value="$PROJECT_DIR$/src/clue/Human.java" />
+        <option value="$PROJECT_DIR$/src/clue/Tile.java" />
+        <option value="$PROJECT_DIR$/src/clue/MurderCard.java" />
+        <option value="$PROJECT_DIR$/src/clue/DetectiveCard.java" />
         <option value="$PROJECT_DIR$/src/clue/Room.java" />
+        <option value="$PROJECT_DIR$/src/clue/Game.java" />
+        <option value="$PROJECT_DIR$/src/clue/Board.java" />
+        <option value="$PROJECT_DIR$/src/clue/Player.java" />
+        <option value="$PROJECT_DIR$/src/clue/AI.java" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="-7" />
-    <option name="width" value="974" />
-    <option name="height" value="1087" />
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="814" />
+    <option name="height" value="907" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="Clue-Game" type="b2602c69:ProjectViewProjectNode" />
               <item name="Clue-Game" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Clue-Game" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Clue-Game" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Clue-Game" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Clue-Game" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="clue" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -195,12 +181,15 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554227386163" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1555103393318" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RunDashboard">
@@ -228,18 +217,31 @@
       <workItem from="1554217206035" duration="818000" />
       <workItem from="1554222210428" duration="5070000" />
       <workItem from="1554990451793" duration="5561000" />
-      <workItem from="1555000603595" duration="1817000" />
+      <workItem from="1555000603595" duration="2102000" />
+      <workItem from="1555098692942" duration="1572000" />
+      <workItem from="1555329945651" duration="63000" />
+      <workItem from="1555330739188" duration="21410000" />
+      <workItem from="1555416813229" duration="9351000" />
+      <workItem from="1555431298831" duration="241000" />
     </task>
+    <task id="LOCAL-00001" summary="add following board functionalities:&#10;&#10;- adjacent tiles&#10;- checking for landable tiles upon player moves&#10;- BFS&#10;- human dice roll">
+      <created>1555066319743</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1555066319743</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13266000" />
+    <option name="totallyTimeSpent" value="46188000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="0" width="974" height="1087" extended-state="0" />
+    <frame x="-8" y="-8" width="1616" height="916" extended-state="7" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.3501094" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17095116" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -248,7 +250,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.20300752" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.27389902" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -260,7 +262,7 @@
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.24945295" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.24935733" />
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="right" id="Theme Preview" order="4" />
       <window_info anchor="right" id="Maven" order="5" />
@@ -272,32 +274,15 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="add following board functionalities:&#10;&#10;- adjacent tiles&#10;- checking for landable tiles upon player moves&#10;- BFS&#10;- human dice roll" />
+    <option name="LAST_COMMIT_MESSAGE" value="add following board functionalities:&#10;&#10;- adjacent tiles&#10;- checking for landable tiles upon player moves&#10;- BFS&#10;- human dice roll" />
+  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/clue/MurderCard.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="23" column="6" selection-start-line="23" selection-start-column="6" selection-end-line="23" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/clue/MainMenu.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/clue/Dice.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="16" column="4" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/clue/Player.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="19" column="28" selection-start-line="19" selection-start-column="28" selection-end-line="19" selection-end-column="28" />
+        <state relative-caret-position="221">
+          <caret line="17" column="41" selection-start-line="17" selection-start-column="41" selection-end-line="17" selection-end-column="41" />
         </state>
       </provider>
     </entry>
@@ -308,38 +293,55 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/clue/Dice.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="14" column="4" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/clue/GameInterface.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="21" column="41" selection-start-line="21" selection-start-column="41" selection-end-line="21" selection-end-column="41" />
+        <state relative-caret-position="493">
+          <caret line="34" selection-start-line="34" selection-end-line="34" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/clue/Room.java">
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/src.zip!/java/util/HashMap.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="338">
-          <caret line="70" column="6" selection-start-line="70" selection-start-column="6" selection-end-line="70" selection-end-column="6" />
+        <state relative-caret-position="4876">
+          <caret line="555" column="20" lean-forward="true" selection-start-line="555" selection-end-line="556" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/clue/Tile.java">
+    <entry file="file://$PROJECT_DIR$/src/clue/MurderCard.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="559">
-          <caret line="46" column="4" lean-forward="true" selection-start-line="46" selection-start-column="4" selection-end-line="46" selection-end-column="4" />
+        <state relative-caret-position="476">
+          <caret line="42" column="5" selection-start-line="42" selection-start-column="5" selection-end-line="42" selection-end-column="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/clue/DetectiveCard.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="662">
-          <caret line="88" column="33" selection-start-line="88" selection-start-column="33" selection-end-line="88" selection-end-column="33" />
+        <state relative-caret-position="497">
+          <caret line="115" column="5" selection-start-line="115" selection-start-column="5" selection-end-line="115" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/clue/Human.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2567">
+          <caret line="159" column="39" selection-start-line="159" selection-start-column="39" selection-end-line="159" selection-end-column="39" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/clue/Board.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-833">
-          <caret line="15" column="6" selection-start-line="15" selection-start-column="6" selection-end-line="15" selection-end-column="6" />
+        <state relative-caret-position="1020">
+          <caret line="67" column="5" selection-start-line="67" selection-start-column="5" selection-end-line="67" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#355#356#0" expanded="true" />
@@ -348,28 +350,51 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/clue/Game.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="18" column="22" selection-start-line="18" selection-start-column="22" selection-end-line="18" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/clue/AI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+        <state relative-caret-position="2856">
+          <caret line="178" column="22" selection-start-line="178" selection-start-column="22" selection-end-line="178" selection-end-column="22" />
+          <folding>
+            <element signature="e#6029#6030#0" expanded="true" />
+            <element signature="e#6064#6065#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/clue/Human.java">
+    <entry file="file://$PROJECT_DIR$/src/clue/Room.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="69" column="65" lean-forward="true" selection-start-line="69" selection-start-column="65" selection-end-line="69" selection-end-column="65" />
+        <state relative-caret-position="544">
+          <caret line="36" column="28" selection-start-line="36" selection-start-column="28" selection-end-line="36" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="5" selection-start-line="3" selection-start-column="5" selection-end-line="3" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/clue/Tile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="259">
+          <caret line="36" column="54" selection-start-line="36" selection-start-column="54" selection-end-line="36" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/clue/Game.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="13" column="19" selection-start-line="13" selection-start-column="19" selection-end-line="13" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/clue/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="23" column="41" lean-forward="true" selection-start-line="23" selection-start-column="41" selection-end-line="23" selection-end-column="41" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1505#1506#0" expanded="true" />
-            <element signature="e#1601#1602#0" expanded="true" />
           </folding>
         </state>
       </provider>

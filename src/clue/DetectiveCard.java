@@ -115,11 +115,9 @@ class DetectiveCard {
         return null;
     }
 
-
     public void cardToString(){
         System.out.println(Arrays.asList(weapons));
         System.out.println(Arrays.asList(rooms));
         System.out.println(Arrays.asList(characters));
-
     }
 }
