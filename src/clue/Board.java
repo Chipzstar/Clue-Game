@@ -110,7 +110,9 @@ class Board {
             for(Tile t : hashMap.get(i)) {
                 if (t instanceof RoomTile) {
                     if (((RoomTile) t).isDoor()) {
-                        roomsInReach.add((RoomTile) t);
+                        // ensures the room tile added
+                        // references the 'room index' tile
+                        roomsInReach.add((RoomTile) ((RoomTile) t).getRoom().getRoomIndex());
                     }
                 }
             }

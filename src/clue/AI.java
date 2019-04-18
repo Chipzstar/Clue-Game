@@ -28,13 +28,71 @@ public class AI extends Player {
 
 	private Difficulty level;
 
-	public AI(String name, Set<MurderCard> mCards, Tile t, Game g, DetectiveCard d, Difficulty l) {
+	/**
+	 *
+	 * @param name
+	 * @param mCards
+	 * @param t
+	 * @param d
+	 * @param l
+	 */
+	public AI(String name, Set<MurderCard> mCards, Tile t, DetectiveCard d, Difficulty l) {
 		this.name = name;
 		this.mCards = mCards;
 		this.position = t;
 		this.dCard = d;
 		this.level = l;
 		this.immuneToSuggestion = false;
+	}
+
+	//
+	public void aiTurn() {
+		switch (level) {
+			case EASY:
+				rollDiceAndMove();
+				if (this.position instanceof RoomTile) {
+					makeSuggestion();
+					updateDetectiveCard();
+				}
+				break;
+			//if AI is on a room tile, AI will check if that room is not marked on d-card
+			//if unmarked, AI will stay on roomTile and make another suggestion
+			//else AI checks if room has shortcut and if shortcut room is unmarked on d-card
+			//if so, AI uses shortcut
+			//else AI rolls dice and moves
+			case MEDIUM:
+				if (this.position instanceof RoomTile) {
+					if (this.dCard.rooms.get(this.dCard.getRoomMCard(((RoomTile) this.position).getRoom().getName())).equals(DetectiveCard.Mark.BLANK)) {
+						makeSuggestion();
+						updateDetectiveCard();
+					} else if (((RoomTile) this.position).getRoom().getShortcut() != null) {
+						if (this.dCard.rooms.get(this.dCard.getRoomMCard(((RoomTile) this.position).getRoom().getShortcut().getName())).equals(DetectiveCard.Mark.BLANK)) {
+							useShortcut((RoomTile) this.position);
+						}
+					} else {
+						rollDiceAndMove();
+					}
+				} else {
+					rollDiceAndMove();
+				}
+				break;
+		}
+	}
+
+	/**
+	 * This method should ONLY be called after all players have finished revealing their cards in
+	 * response to the current AI's suggestion
+	 */
+	private void updateDetectiveCard() {
+		if (this.g.revealedCard instanceof CharacterMCard) {
+			this.dCard.characters.put(this.g.revealedCard, DetectiveCard.Mark.MARK);
+		} else if (this.g.revealedCard instanceof WeaponMCard) {
+			this.dCard.weapons.put(this.g.revealedCard, DetectiveCard.Mark.MARK);
+		} else if (this.g.revealedCard instanceof RoomMCard) {
+			this.dCard.rooms.put(this.g.revealedCard, DetectiveCard.Mark.MARK);
+		} else {
+			makeAccusation();
+		}
 	}
 
 	public void rollDiceAndMove() {
@@ -105,11 +163,11 @@ public class AI extends Player {
 		}
 	}
 
-	public void useShortcut() {
-		this.position = ((RoomTile) this.position).getRoom().getShortcut().getRoomIndex();
+	private void useShortcut(RoomTile position) {
+		setPosition(position.getRoom().getShortcut().getRoomIndex());
 	}
 
-	public ArrayList<MurderCard> makeSuggestion() {
+	private ArrayList<MurderCard> makeSuggestion() {
 		ArrayList<MurderCard> suggestion = new ArrayList<>();
 		switch (this.level) {
 			//Easy mode:
@@ -183,11 +241,11 @@ public class AI extends Player {
 		return suggestion;
 	}
 
-	public ArrayList<MurderCard> makeAccusation() {
+	private ArrayList<MurderCard> makeAccusation() {
 		return this.makeSuggestion();
 	}
 
-	public MurderCard answerSuggestion(ArrayList<MurderCard> suggestion) {
+	private MurderCard answerSuggestion(ArrayList<MurderCard> suggestion) {
 		ArrayList<MurderCard> matches = new ArrayList<>();
 		for (MurderCard m : suggestion) {
 			if (mCards.contains(m)) {
@@ -203,6 +261,7 @@ public class AI extends Player {
 			} else {
 				//return random match, can be choosen, but will be implemented later
 				Collections.shuffle(matches);
+
 				return (matches.get(0));
 			}
 		}

@@ -23,10 +23,9 @@ public class Human extends Player{
      * @param name
      * @param mCards
      * @param t
-     * @param g
      * @param d
      */
-    public Human(String name, Set<MurderCard> mCards, Tile t, Game g, DetectiveCard d){
+    public Human(String name, Set<MurderCard> mCards, Tile t, DetectiveCard d){
         this.name = name;
         this.mCards = mCards;
         this.position = t;
@@ -53,13 +52,16 @@ public class Human extends Player{
      */
     public void rollDiceAndMove(){
         int roll = this.g.d.roll();
-        ArrayList<Tile> moveTo = this.g.b.getReachableTiles(roll, this.position);
-        for(int i = 0; i<moveTo.size();i++){
-            System.out.println(i +": "+moveTo.get(i).toString());
+        ArrayList<Tile> accessibleTiles = this.g.b.getReachableTiles(roll, this.position);
+        for(int i = 0; i<accessibleTiles.size();i++){
+            System.out.println(i +": "+accessibleTiles.get(i).toString());
         }
-        setPosition(moveTo.get(getInput(moveTo.size()-1)));
+        setPosition(accessibleTiles.get(getInput(accessibleTiles.size()-1)));
         if(this.position instanceof SpecialTile){
             drawIntrigue();
+        }
+        if(this.position instanceof RoomTile){
+            setPosition(((RoomTile) this.position).getRoom().getRoomIndex());
         }
     }
 

@@ -16,7 +16,14 @@ public class Game implements GameInterface {
 	protected ArrayList<Player> playerList;
 	protected LinkedList<MurderCard> solution;
 	protected LinkedList<IntrigueCard> intrigueDeck;
+	protected MurderCard revealedCard = null;
 	int currentPlayer;
 
+	public void setRevealedCard(MurderCard revealedCard) {
+		this.revealedCard = revealedCard;
+	}
 
+	public MurderCard getRevealedCard() {
+		return revealedCard;
+	}
 }
