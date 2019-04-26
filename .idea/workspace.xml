@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cc0c243a-69e7-4b8d-b3a1-04837bf2a019" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/clue/AI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clue/AI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/clue/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clue/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/clue/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clue/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/clue/Human.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clue/Human.java" afterDir="false" />
-    </list>
+    <list default="true" id="cc0c243a-69e7-4b8d-b3a1-04837bf2a019" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -261,7 +255,7 @@
       <workItem from="1555416813229" duration="9351000" />
       <workItem from="1555431298831" duration="536000" />
       <workItem from="1555596413579" duration="36000" />
-      <workItem from="1555596814948" duration="8256000" />
+      <workItem from="1555596814948" duration="8783000" />
     </task>
     <task id="LOCAL-00001" summary="add following board functionalities:&#10;&#10;- adjacent tiles&#10;- checking for landable tiles upon player moves&#10;- BFS&#10;- human dice roll">
       <created>1555066319743</created>
@@ -274,11 +268,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="54775000" />
+    <option name="totallyTimeSpent" value="55302000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="916" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.16388175" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
