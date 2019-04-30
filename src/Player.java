@@ -79,13 +79,7 @@ class Player {
         }
     }
 
-    public boolean checkAccusation(ArrayList<MurderCard> accusation) {
-        if(accusation.containsAll(this.g.solution)){
-            System.out.println("WINNER!");
-            return true;
-        }
-        return false;
-    }
+    
     public void revealCards( ArrayList <MurderCard> revealed){};
     public void doTurn(){};
     public MurderCard answerSuggestion(ArrayList<MurderCard> suggestion){return null;}

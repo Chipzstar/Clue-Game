@@ -9,7 +9,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
-
+import java.io.IOException;
+import java.util.Arrays;
 
 /**
  *
@@ -34,6 +35,7 @@ public class Human extends Player{
         this.g = g;
         this.immuneToSuggestion = false;
         input = new Scanner(System.in);
+        System.out.println(mCards.size());
     }
 
     /**
@@ -51,19 +53,24 @@ public class Human extends Player{
     }
 
     public static void clearScreen() {  
-    System.out.print("\033[H\033[2J");  
-    System.out.flush();  
+    try
+    {
+        new ProcessBuilder("cmd","/c","cls").inheritIO().start().waitFor();
+    }catch(Exception e){
+        System.out.println(e);
+    }
    }
     
     @Override
     public void doTurn(){
         //make move
+        revealCards(new ArrayList<MurderCard>(this.mCards));
+        clearScreen();
         g.showBoard();
         System.out.println(toString());
         System.out.println(this.dCard.toString());
         makeMove();
         clearScreen();
-        System.out.println("screen cleared");
         System.out.println(toString());
         
         //do suggestion
@@ -75,16 +82,38 @@ public class Human extends Player{
             System.out.println("1: yes");
             System.out.println("2: no");           
             switch(getInput(2)){
-                case 0:
-                    
+                case 0:      
                     makeSuggestion();
                     break;
                 case 1:
                     System.out.println("no suggestion");
+                    break;
             }          
         }
+        System.out.println(this.toString());
+        System.out.println(this.dCard.toString());
         System.out.println("Do you want to make a Accusation");
-        
+        System.out.println("1: yes");
+        System.out.println("2: no");
+        switch(getInput(2)){
+                case 0:
+                      System.out.println("ARE YOU SURE Accusation");
+                      System.out.println("1: no");
+                      System.out.println("2: yes");
+                      switch(getInput(2)){
+                        case 0:
+                            System.out.println("no Accusation");
+                            break;
+                        case 1:
+                            makeAccusation();
+                            break;
+                        }
+                    break;
+                case 1:
+                    System.out.println("no Accusation");
+                    break;
+         }
+        System.out.println("TurnEnd");
 
         //do accusation
 
@@ -92,8 +121,10 @@ public class Human extends Player{
     }
     @Override
     public void revealCards(ArrayList<MurderCard> revealed){
-        for(MurderCard m: revealed){
-            this.dCard.mark(m.getName());
+        if(revealed.size()>0){
+            for(MurderCard m: revealed){
+                this.dCard.mark(m.getName());
+            }
         }
         
     }
@@ -116,14 +147,16 @@ public class Human extends Player{
                 break;
             case 1:
                 System.out.println("staying");
+                break;
             case 2:
                 useShortcut();
+                break;
         }
         
     }
     public void rollDiceAndMove(){
-        System.out.println(this.g.d.getClass());
         int roll = this.g.d.roll();
+        System.out.println(this.name + " rolled a "+roll);
         ArrayList<Tile> accessibleTiles = this.g.b.humanDiceRoll(roll, this.position);
         for(int i = 0; i<accessibleTiles.size();i++){
             System.out.println((i+1) +": "+accessibleTiles.get(i).toString());
@@ -150,7 +183,7 @@ public class Human extends Player{
      */
     public void makeSuggestion(){
         ArrayList<MurderCard> suggestion = new ArrayList<>();
-
+        System.out.println(this.dCard.toString());
         //WEAPONS
         ArrayList<MurderCard> temp = dCard.getWeaponMCards();
         System.out.println("Select Weapon");
@@ -172,9 +205,8 @@ public class Human extends Player{
 
     /**
      *
-     * @return
      */
-    public ArrayList<MurderCard> makeAccusation(){
+    public void makeAccusation(){
         ArrayList<MurderCard> accusation = new ArrayList<>();
         ArrayList<MurderCard> temp;
 
@@ -199,7 +231,7 @@ public class Human extends Player{
         System.out.print("Selection: ");
         accusation.add(temp.get(getInput(temp.size()-1)));
 
-        return accusation;
+        g.doAccusation(accusation);
     }
 
     /**
@@ -220,19 +252,24 @@ public class Human extends Player{
 
     @Override
     public MurderCard answerSuggestion(ArrayList<MurderCard> suggestion){
-        toString();
+        clearScreen();
+        System.out.println(toString());
         ArrayList <MurderCard> matches = new ArrayList<>();
+        System.out.println("Suggestion");
         for(MurderCard m:suggestion){
+            System.out.println(m.name);
             if(mCards.contains(m)){
                 matches.add(m);
             }
         }
         if(matches.isEmpty()){
+            System.out.println("no Matches");
             return null;
         }
         else{
             if(immuneToSuggestion){
                 immuneToSuggestion = false;
+                System.out.println("suggestion immunity used");
                 return null;
             } else {
                 System.out.println("Cards matched with suggestion are:");

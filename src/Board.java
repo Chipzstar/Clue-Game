@@ -211,13 +211,10 @@ class Board {
     }
 
     public ArrayList<Tile> humanDiceRoll(int value, Tile t){
-        System.out.println("value:"+ value + " tile:" + t.toString());
         HashMap<Integer,ArrayList<Tile>> hashMap = getBFS(t);
         ArrayList<Tile> tilesInReach = new ArrayList<>();
-        System.out.println("hashMap size:"+hashMap.size());
         for(int i = 1; i<= value;i++){
             if(i<hashMap.size()){
-                System.out.println("size"+hashMap.get(i).size());
                 tilesInReach.addAll(hashMap.get(i));
             }
         }

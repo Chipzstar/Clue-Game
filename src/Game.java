@@ -30,7 +30,15 @@ import java.util.Collections;
 
 
 public class Game implements GameInterface {
-    
+        
+    public static void clearScreen() {  
+        try
+        {
+            new ProcessBuilder("cmd","/c","cls").inheritIO().start().waitFor();
+        }catch(Exception e){
+            System.out.println(e);
+        }
+    }
     //default config settings
     public enum Settings {
         CONFIG("config.properties"), BOARD("board.csv");
@@ -90,6 +98,7 @@ public class Game implements GameInterface {
     //can remove for javafx
     private void menu() throws IOException {
         while(true) {
+            clearScreen();
             String menu =  "1. New Game\n"
                          + "2. Load Game\n"
                          + "3. Edit Settings\n"    
@@ -116,7 +125,9 @@ public class Game implements GameInterface {
                 case 5: System.exit(0);
                 default: System.out.println("Invalid Choice. Select Again."); break;
             }
-            menu();
+            new Game().menu();
+
+            
         }
     }
     
@@ -159,12 +170,14 @@ public class Game implements GameInterface {
         mCards.addAll(genCards(weapons, "weapon"));
         mCards.addAll(genCards(characters, "character"));
 
-        int index = 0;
-        for(String chara : characters) {
-            index++;
-            System.out.println(index + "." + chara);
-        }
+        int index = characters.size();
+        
         for(int i = 0; i < numPlayers; i++) {
+            int charNum=0;
+            for(String character : characters) {
+                charNum++;
+                System.out.println((charNum) + "." + character);
+            }   
             System.out.print("Select Character for Player " + (i+1) + ": ");
             int j = getInput(1, characters.size(), "Invalid choice. Try Again.");
             playerList.add(new Human(characters.remove(j-1), new HashSet<>(), 
@@ -172,7 +185,7 @@ public class Game implements GameInterface {
         }
         for(int i = 0; i < numAI; i++) {
             playerList.add(new AI(characters.remove(rand.nextInt(characters.size())), new HashSet<>(), 
-                           b.startTiles.remove(i), this, new DetectiveCard(mCards),AI.Difficulty.EASY));
+                            b.startTiles.remove(0), this, new DetectiveCard(mCards),AI.Difficulty.EASY));
         }
         deal(mCards);
         d = new Dice(6, 2);
@@ -187,7 +200,7 @@ public class Game implements GameInterface {
             if("character".equals(type)) cards.add(new CharacterMCard(name));
         });
         int r = rand.nextInt(cards.size());
-        System.out.println(r);
+//        System.out.println(r);
         solution.add(cards.get(r));
         return cards;
     }
@@ -221,7 +234,7 @@ public class Game implements GameInterface {
         int val;
         val = input.nextInt();
         while(val<minVal||val>maxVal){
-            System.out.println(message);
+            System.out.print(message);
             System.out.print("->");
             val = input.nextInt();
         }
@@ -229,9 +242,9 @@ public class Game implements GameInterface {
     }
     
     private void playGame(){
-//            for(MurderCard m:solution){
-//                System.out.println(m.name+" "+ m.getClass());
-//            }
+         for(MurderCard m:solution){
+               System.out.println(m.name+" "+ m.getClass());
+          }
 //            for(Player p: playerList){
 //                System.out.println(p.name+"  "+p.getClass()+">");
 //                for(MurderCard m: p.mCards){
@@ -250,23 +263,31 @@ public class Game implements GameInterface {
             Collections.rotate(playerList, 1);
             i++;
         }while(playerList.size()>1 && i<10);
+        System.out.println(playerList.get(0).name + " is the WINNER");
+         for(MurderCard m:solution){
+               System.out.println(m.name+" "+ m.getClass());
+          }
+         
     }
     
-    public ArrayList<MurderCard> doSuggestion( ArrayList<MurderCard> suggestion){
+    public void doSuggestion( ArrayList<MurderCard> suggestion){
         ArrayList<MurderCard> cardsRevealed = new ArrayList<>();
         for(int i = 1; i<playerList.size();i++){
             cardsRevealed.add(playerList.get(i).answerSuggestion(suggestion));
-            if(suggestion.get(2).name == playerList.get(i).name){
+            if(suggestion.get(2).name.equals(playerList.get(i).name)){
                 playerList.get(i).setPosition(((RoomTile)playerList.get(0).getPosition()).getRoom().getRoomIndex());
             }
         }
-        return cardsRevealed;
+        playerList.get(0).revealCards(cardsRevealed);
         
     }
     
     public void doAccusation(ArrayList<MurderCard> accusation){
         if(solution.containsAll(accusation)){
             System.out.println(playerList.get(0).name + " has guessed correctly");
+            for(int i = 1;i< playerList.size();i++){
+                playerList.remove(i);
+            }
         }
         else{
             System.out.println(playerList.get(0).name + 
