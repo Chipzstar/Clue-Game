@@ -60,6 +60,7 @@ public class Human extends Player{
         //make move
         g.showBoard();
         System.out.println(toString());
+        System.out.println(this.dCard.toString());
         makeMove();
         clearScreen();
         System.out.println("screen cleared");
@@ -75,12 +76,14 @@ public class Human extends Player{
             System.out.println("2: no");           
             switch(getInput(2)){
                 case 0:
+                    
                     makeSuggestion();
                     break;
                 case 1:
                     System.out.println("no suggestion");
             }          
         }
+        System.out.println("Do you want to make a Accusation");
         
 
         //do accusation
@@ -217,6 +220,7 @@ public class Human extends Player{
 
     @Override
     public MurderCard answerSuggestion(ArrayList<MurderCard> suggestion){
+        toString();
         ArrayList <MurderCard> matches = new ArrayList<>();
         for(MurderCard m:suggestion){
             if(mCards.contains(m)){
@@ -233,7 +237,7 @@ public class Human extends Player{
             } else {
                 System.out.println("Cards matched with suggestion are:");
                 for(int i = 0; i<matches.size(); i++){
-                    System.out.println(i +"  "+matches.get(i).name + " "+ matches.get(i).getClass().getName());
+                    System.out.println((i+1) +"  "+matches.get(i).name + " "+ matches.get(i).getClass().getName());
                 }
                 System.out.println("What card do you want to reveal");
                 getInput(matches.size()-1);
