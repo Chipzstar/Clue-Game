@@ -111,10 +111,19 @@ class DetectiveCard {
     }
 
 
-    public void cardToString(){
-        System.out.println(Arrays.asList(weapons));
-        System.out.println(Arrays.asList(rooms));
-        System.out.println(Arrays.asList(characters));
-
+    public String toString(){
+        String s = "Detective Card\n=============================\nWEAPONS\n";
+        for(MurderCard m: weapons.keySet()){
+            s+= m.name+": "+ weapons.get(m).representation.toString()+"\n";
+        }
+        s+="ROOMS\n";
+        for(MurderCard m: rooms.keySet()){
+            s+= m.name+": "+ rooms.get(m).representation.toString()+"\n";
+        }
+        s+="CHARACTERS\n";
+        for(MurderCard m: characters.keySet()){
+            s+= m.name+": "+ characters.get(m).representation.toString()+"\n";
+        }
+        return s;
     }
 }
