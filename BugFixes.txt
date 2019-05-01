@@ -1,0 +1,13 @@
+Bugs to fix:
+
+1) Input is skipped sometimes - unknown reason
+2) Index tiles not aligned correctly - happens with conservatory (example)
+
+
+
+matt fixes
+1) kitchen and conservatory has no index set causing issues with shortcuts and instance checks
+2) the board isnt 100% replecating the csv file, with room tiles missing (this is the reason why each row has diffrent sizes in the grid)
+3) special tiles are spawning in null tile locations, breaking the map and making some special tiles impossible to reach
+4) /optional/ the game rules state the players should start at the same location (scarlet at a certain tile everytime) also
+   player 1 chooses mustard and player 2 chooses scarlet, player 2 should go first.

@@ -151,7 +151,7 @@ public class Game implements GameInterface {
         List<String> characters = new ArrayList<>(Arrays.asList(config.getProperty("Characters", Settings.DEFAULT_CHARACTERS).split(",")));
         List<String> weapons = new ArrayList<>(Arrays.asList(config.getProperty("Weapons", Settings.DEFAULT_WEAPONS).split(",")));
         ArrayList<MurderCard> mCards;
-        intialiseIntrigue();
+        initialiseIntrigue();
         this.b = new Board();
         //System.out.println(b.toString());
         
@@ -160,7 +160,7 @@ public class Game implements GameInterface {
         //makes sure player and ai number is between 2 and 6        
         do {
             System.out.print("Number of players: ");
-            numPlayers = getInput(0, MAX_PLAYERS, "Ivalid number. Try Again.");
+            numPlayers = getInput(0, MAX_PLAYERS, "Invalid number. Try Again.");
             if(numPlayers < MAX_PLAYERS) { 
                 System.out.print("Number of ai: ");
                 numAI = getInput(0, MAX_PLAYERS-numPlayers, "Invalid number. Try Again.");
@@ -221,7 +221,7 @@ public class Game implements GameInterface {
         }
     }
     
-    private void intialiseIntrigue(){
+    private void initialiseIntrigue(){
         for(int i = 0; i <2;i++){
             intrigueDeck.add(new IntrigueCard(IntrigueCard.IntrigueCardType.AVOIDSUGGESTION));
             intrigueDeck.add(new IntrigueCard(IntrigueCard.IntrigueCardType.EXTRATURN));
@@ -264,12 +264,13 @@ public class Game implements GameInterface {
         ArrayList<MurderCard> cardsRevealed = new ArrayList<>();
         for(int i = 1; i<playerList.size();i++){
             cardsRevealed.add(playerList.get(i).answerSuggestion(suggestion));
-            if(suggestion.get(2).name.equals(playerList.get(i).name)){
+            //if a player's character piece matches the character card included in the suggestion
+            //the player's piece is moved to that room
+            if(suggestion.get(0).name.equals(playerList.get(i).name)){
                 playerList.get(i).setPosition(((RoomTile)playerList.get(0).getPosition()).getRoom().getRoomIndex());
             }
         }
         playerList.get(0).revealCards(cardsRevealed);
-        
     }
     
     public void doAccusation(ArrayList<MurderCard> accusation){

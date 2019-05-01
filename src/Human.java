@@ -27,7 +27,7 @@ public class Human extends Player{
      * @param t
      * @param d
      */
-    public Human(String name, HashSet<MurderCard> mCards, Tile t,Game g, DetectiveCard d){
+    public Human(String name, HashSet<MurderCard> mCards, Tile t, Game g, DetectiveCard d){
         this.name = name;
         this.mCards = mCards;
         this.position = t;
@@ -119,15 +119,26 @@ public class Human extends Player{
 
         
     }
+
+    /**
+     *
+     * @param revealed
+     */
     @Override
-    public void revealCards(ArrayList<MurderCard> revealed){
-        if(revealed.size()>0){
-            for(MurderCard m: revealed){
-                this.dCard.mark(m.getName());
+    public void revealCards(ArrayList<MurderCard> revealed) {
+        if (revealed.size() > 0) {
+            System.out.println(revealed.toArray().toString());
+            System.out.println(revealed.size());
+
+            for (MurderCard m : revealed) {
+                if (m instanceof MurderCard) {
+                    System.out.println("returns card: " + m.getName());
+                    this.dCard.mark(m.getName());
+                }
             }
         }
-        
     }
+
     private void makeMove(){
         int choice = -1;
         System.out.println("Making a move:");
@@ -158,14 +169,11 @@ public class Human extends Player{
     public void rollDiceAndMove(){
         int roll = this.g.d.roll();
         System.out.println(this.name + " rolled a "+roll);
-        ArrayList<Tile> accessibleTiles = this.g.b.humanDiceRoll(roll, this.position);
+        ArrayList<Tile> accessibleTiles = this.g.b.diceRoll(roll, this.position);
         for(int i = 0; i<accessibleTiles.size();i++){
             System.out.println((i+1) +": "+accessibleTiles.get(i).toString());
         }
         setPosition(accessibleTiles.get(getInput(accessibleTiles.size()-1)));
-        if(this.position instanceof SpecialTile){
-            drawIntrigue();
-        }
         if(this.position instanceof RoomTile){
             setPosition(((RoomTile) this.position).getRoom().getRoomIndex());
         }
@@ -278,11 +286,12 @@ public class Human extends Player{
                     System.out.println((i+1) +"  "+matches.get(i).name + " "+ matches.get(i).getClass().getName());
                 }
                 System.out.println("What card do you want to reveal");
-                getInput(matches.size()-1);
-                return(matches.get(0));
+                int val = getInput(matches.size()-1);
+                return matches.get(val);
             }
         }
     }
+
     @Override
     public String toString(){
         String s = "Human player: " +name +"\n" +"Location: ";
@@ -290,7 +299,7 @@ public class Human extends Player{
             s+= ((RoomTile)position).getRoom().getName();
         }
         else{
-            s+= position.getClass().getSimpleName() + "  x:"+ position.getCoords().x+"  y: "+position.getCoords().y;
+            s+= position.getClass().getSimpleName() + " (x:" + position.getCoords().x + "  y:" + position.getCoords().y+")";
         }
         return s;
     }
