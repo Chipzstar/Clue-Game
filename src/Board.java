@@ -165,6 +165,7 @@ class Board {
 
     public boolean landableTile(Tile t){
         boolean landable = false;
+        
         if(t instanceof RoomTile){
             if(((RoomTile) t).getIsDoor()){
                 landable= true;

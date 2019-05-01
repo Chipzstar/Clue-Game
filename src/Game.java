@@ -106,7 +106,8 @@ public class Game implements GameInterface {
                          + "5. Quit";
             System.out.println(menu);
             switch(input.nextInt()) {
-                case 1: initialise(); break;
+                case 1: initialise(); new Game().menu(); break;
+                
                 case 2: //load and save games?
                 //opens config and board csv files in user systems selected editors (e.g. notepad and excel)
                 //see readme
@@ -125,7 +126,7 @@ public class Game implements GameInterface {
                 case 5: System.exit(0);
                 default: System.out.println("Invalid Choice. Select Again."); break;
             }
-            new Game().menu();
+            
 
             
         }
@@ -245,17 +246,6 @@ public class Game implements GameInterface {
          for(MurderCard m:solution){
                System.out.println(m.name+" "+ m.getClass());
           }
-//            for(Player p: playerList){
-//                System.out.println(p.name+"  "+p.getClass()+">");
-//                for(MurderCard m: p.mCards){
-//                    System.out.println(m.name+" "+ m.getClass());
-//                }
-//            }
-//            System.out.println(b.board.get(1).get(3).toString());
-//            System.out.println("number of doors: " +((RoomTile)b.board.get(1).get(1)).getRoom().getDoors().size());
-//            for( Tile t: ((RoomTile) b.board.get(1).get(1)).getRoom().getDoors()){
-//                System.out.println(t.c.x + " " + t.c.y);
-//            }
               int i = 0;
         do{
             playerList.get(0).doTurn();

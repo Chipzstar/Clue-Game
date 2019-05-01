@@ -93,6 +93,7 @@ public class AI extends Player {
         
 
 
+        @Override
 	public void rollDiceAndMove() {
 		int roll = this.g.d.roll();
 		ArrayList<Tile> accessibleTiles = this.g.b.getReachableTiles(roll, this.position);

@@ -154,6 +154,7 @@ public class Human extends Player{
         }
         
     }
+    @Override
     public void rollDiceAndMove(){
         int roll = this.g.d.roll();
         System.out.println(this.name + " rolled a "+roll);

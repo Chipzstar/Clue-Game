@@ -45,13 +45,7 @@ class Player {
                 Collections.rotate(g.playerList, -1);
                 break;
             case THROWAGAIN:
-                if (this instanceof Human) {
-                    ((Human) this).rollDiceAndMove();
-                } else if (this instanceof AI) {
-                    ((AI) this).rollDiceAndMove();
-                } else {
-                    System.err.println("ERROR! Unrecognized Player!!");
-                }
+                rollDiceAndMove();
                 break;
             case TELEPORT:
                 int x = 0, y = 0;
@@ -83,6 +77,7 @@ class Player {
     public void revealCards( ArrayList <MurderCard> revealed){};
     public void doTurn(){};
     public MurderCard answerSuggestion(ArrayList<MurderCard> suggestion){return null;}
+    public void rollDiceAndMove(){};
     //turnStart -> roll, stay or use shortcut
     //roll -> move
     //if in room -> make a suggestion?
