@@ -8,7 +8,7 @@
 import java.util.Random;
 /**
  *
- * @author xxlig
+ * @author its your boi
  */
 public class Dice {
     private Random randomGenerator = new Random();
@@ -20,10 +20,10 @@ public class Dice {
         this.noOfDie = n;
     }
     public int roll() {
-        int result = 0;
+        int r = 0;
         for(int i = 0; i < noOfDie; i++){
-            result += randomGenerator.nextInt(sides) + 1;  
+            r += randomGenerator.nextInt(sides) + 1;  
         }
-        return result;   
+        return r;   
     }
 }
