@@ -103,7 +103,8 @@ class Board {
 		if (!roomNames.contains(name)) {
 			rooms.add(new Room(name));
 			roomNames.add(name);
-		} else return rooms.get(roomNames.indexOf(name));
+		} 
+		return rooms.get(roomNames.indexOf(name));
 	}
 
 	public void setSpecials() {
