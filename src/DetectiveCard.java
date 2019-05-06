@@ -47,19 +47,19 @@ class DetectiveCard {
 
     public boolean mark(String s){
         for(MurderCard w: weapons.keySet()){
-            if(s == w.getName()){
+            if(s == w.toString()){
                 weapons.put(w, Mark.MARK);
                 return true;
             }
         }
         for(MurderCard r: rooms.keySet()){
-            if(s == r.getName()){
+            if(s == r.toString()){
                 rooms.put(r, Mark.MARK);
                 return true;
             }
         }
         for(MurderCard c: characters.keySet()){
-            if(s == c.getName()){
+            if(s == c.toString()){
                 characters.put(c, Mark.MARK);
                 return true;
             }
@@ -69,19 +69,19 @@ class DetectiveCard {
 
     public boolean unmark(String s){
         for(MurderCard w: weapons.keySet()){
-            if(s == w.getName()){
+            if(s == w.toString()){
                 weapons.put(w, Mark.BLANK);
                 return true;
             }
         }
         for(MurderCard r: rooms.keySet()){
-            if(s == r.getName()){
+            if(s == r.toString()){
                 rooms.put(r, Mark.BLANK);
                 return true;
             }
         }
         for(MurderCard c: characters.keySet()){
-            if(s == c.getName()){
+            if(s == c.toString()){
                 characters.put(c, Mark.BLANK);
                 return true;
             }

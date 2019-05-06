@@ -132,8 +132,8 @@ public class Human extends Player{
 
             for (MurderCard m : revealed) {
                 if (m instanceof MurderCard) {
-                    System.out.println("returns card: " + m.getName());
-                    this.dCard.mark(m.getName());
+                    System.out.println("returns card: " + m.toString());
+                    this.dCard.mark(m.toString());
                 }
             }
         }
@@ -249,7 +249,7 @@ public class Human extends Player{
      */
     private void displayDetectiveCardItems(ArrayList<MurderCard> items){
         for(int i = 0; i<items.size(); i++){
-            System.out.println((i+1) +": " +items.get(i).getName());
+            System.out.println((i+1) +": " +items.get(i).toString());
         }
     }
 

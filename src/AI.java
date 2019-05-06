@@ -117,8 +117,8 @@ public class AI extends Player {
             System.out.println(revealed.size());
             for(MurderCard m: revealed){
                     if(m instanceof MurderCard){
-                        System.out.println("returns card: " + m.getName());
-                        this.dCard.mark(m.getName());
+                        System.out.println("returns card: " + m.toString());
+                        this.dCard.mark(m.toString());
                 }
             }
         }
@@ -285,9 +285,9 @@ public class AI extends Player {
         clearScreen();
         System.out.println(toString());
         ArrayList<MurderCard> matches = new ArrayList<>();
-        System.out.println("AI Suggestion");
+        System.out.println("Suggestion");
         for (MurderCard m : suggestion) {
-            System.out.println("Card: "+m.name);
+            System.out.println(m.name);
             if (mCards.contains(m)) {
                 matches.add(m);
             }

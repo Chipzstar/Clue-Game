@@ -1,27 +1,27 @@
 n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n
-n,study,study,study,study,study,study,n,t,n,hall,hall,hall,hall,hall,hall,n,C,n,lounge,lounge,lounge,lounge,lounge,lounge,n
-n,study,study,study,study,study,study,study,t,t,hall,hall,hall,hall,hall,hall,t,t,lounge,lounge,lounge,lounge,lounge,lounge,lounge,n
-n,study,study,study,study,study,study,study,t,t,hall,hall,hall,hall,hall,hall,t,t,lounge,lounge,lounge,lounge,lounge,lounge,lounge,n
-n,study@kitchen,study,study,study,study,study,study1,t,t,hall,hall,hall,hall,hall,hall,t,t,lounge,lounge,lounge,lounge,lounge,lounge,lounge,n
-n,n,t,t,t,t,t,t,t,t,hall1,hall,hall,hall,hall,hall,t,t,lounge,lounge,lounge,lounge,lounge,lounge,lounge,n
-n,C,t,t,t,t,t,t,t,t,hall,hall,hall,hall,hall,hall,t,t,lounge1,lounge,lounge,lounge,lounge,lounge,lounge@conservantory,n
-n,n,library,library,library,library,library,t,t,t,hall,hall,hall2,hall3,hall,hall,t,t,t,t,t,t,t,t,n,n
-n,library,library,library,library,library,library,library,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,C,n
-n,library,library,library,library,library,library,library2,t,t,n,n,n,n,n,t,t,t,t,t,t,t,t,t,n,n
-n,library,library,library,library,library,library,library,t,t,n,n,n,n,n,t,t,dining room,dining room1,dining room,dining room,dining room,dining room,dining room,dining room,n
-n,n,library,library,library1,library,library,t,t,t,n,n,n,n,n,t,t,dining room,dining room,dining room,dining room,dining room,dining room,dining room,dining room,n
-n,n,t,t,t,t,t,t,t,t,n,n,n,n,n,t,t,dining room,dining room,dining room,dining room,dining room,dining room,dining room,dining room,n
-n,billiard room,billiard room1,billiard room,billiard room,billiard room,billiard room,t,t,t,n,n,n,n,n,t,t,dining room2,dining room,dining room,dining room,dining room,dining room,dining room,dining room,n
-n,billiard room,billiard room,billiard room,billiard room,billiard room,billiard room,t,t,t,n,n,n,n,n,t,t,dining room,dining room,dining room,dining room,dining room,dining room,dining room,dining room,n
-n,billiard room,billiard room,billiard room,billiard room,billiard room,billiard room,t,t,t,n,n,n,n,n,t,t,dining room,dining room,dining room,dining room,dining room,dining room,dining room,dining room,n
-n,billiard room,billiard room,billiard room,billiard room,billiard room,billiard room2,t,t,t,t,t,t,t,t,t,t,t,t,t,dining room,dining room,dining room,dining room,dining room,n
-n,billiard room,billiard room,billiard room,billiard room,billiard room,billiard room,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,n,n
-n,n,t,t,t,t,t,t,t,ball room,ball room2,ball room,ball room,ball room,ball room,ball room3,ball room,t,t,t,t,t,t,t,t,n
-n,C,t,t,t,t,t,t,t,ball room,ball room,ball room,ball room,ball room,ball room,ball room,ball room,t,t,kitchen1,kitchen,kitchen,kitchen,kitchen,n,n
-n,n,conservantory@lounge,conservantory,conservantory,conservantory1,t,t,t,ball room1,ball room,ball room,ball room,ball room,ball room,ball room,ball room4,t,t,kitchen,kitchen,kitchen,kitchen,kitchen,kitchen,n
-n,conservantory,conservantory,conservantory,conservantory,conservantory,conservantory,t,t,ball room,ball room,ball room,ball room,ball room,ball room,ball room,ball room,t,t,kitchen,kitchen,kitchen,kitchen,kitchen,kitchen,n
-n,conservantory,conservantory,conservantory,conservantory,conservantory,conservantory,t,t,ball room,ball room,ball room,ball room,ball room,ball room,ball room,ball room,t,t,kitchen,kitchen,kitchen,kitchen,kitchen,kitchen,n
-n,conservantory,conservantory,conservantory,conservantory,conservantory,conservantory,t,t,ball room,ball room,ball room,ball room,ball room,ball room,ball room,ball room,t,t,kitchen,kitchen,kitchen,kitchen,kitchen,kitchen,n
-n,conservantory,conservantory,conservantory,conservantory,conservantory,conservantory,n,t,t,t,ball room,ball room,ball room,ball room,t,t,t,n,kitchen@study,kitchen,kitchen,kitchen,kitchen,kitchen,n
+n,Study,Study,Study,Study,Study,Study,n,t,n,Hall,Hall,Hall,Hall,Hall,Hall,n,C,n,Lounge,Lounge,Lounge,Lounge,Lounge,Lounge,n
+n,Study,Study,Study,Study,Study,Study,Study,t,t,Hall,Hall,Hall,Hall,Hall,Hall,t,t,Lounge,Lounge,Lounge,Lounge,Lounge,Lounge,Lounge,n
+n,Study,Study,Study,Study,Study,Study,Study,t,t,Hall,Hall,Hall,Hall,Hall,Hall,t,t,Lounge,Lounge,Lounge,Lounge,Lounge,Lounge,Lounge,n
+n,Study@Kitchen,Study,Study,Study,Study,Study,Study1,t,t,Hall,Hall,Hall,Hall,Hall,Hall,t,t,Lounge,Lounge,Lounge,Lounge,Lounge,Lounge,Lounge,n
+n,n,t,t,t,t,t,t,t,t,Hall1,Hall,Hall,Hall,Hall,Hall,t,t,Lounge,Lounge,Lounge,Lounge,Lounge,Lounge,Lounge,n
+n,C,t,t,t,t,t,t,t,t,Hall,Hall,Hall,Hall,Hall,Hall,t,t,Lounge1,Lounge,Lounge,Lounge,Lounge,Lounge,Lounge@Conservatory,n
+n,n,Library,Library,Library,Library,Library,t,t,t,Hall,Hall,Hall2,Hall3,Hall,Hall,t,t,t,t,t,t,t,t,n,n
+n,Library,Library,Library,Library,Library,Library,Library,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,C,n
+n,Library,Library,Library,Library,Library,Library,Library2,t,t,n,n,n,n,n,t,t,t,t,t,t,t,t,t,n,n
+n,Library,Library,Library,Library,Library,Library,Library,t,t,n,n,n,n,n,t,t,Dining Room,Dining Room1,Dining Room,Dining Room,Dining Room,Dining Room,Dining Room,Dining Room,n
+n,n,Library,Library,Library1,Library,Library,t,t,t,n,n,n,n,n,t,t,Dining Room,Dining Room,Dining Room,Dining Room,Dining Room,Dining Room,Dining Room,Dining Room,n
+n,n,t,t,t,t,t,t,t,t,n,n,n,n,n,t,t,Dining Room,Dining Room,Dining Room,Dining Room,Dining Room,Dining Room,Dining Room,Dining Room,n
+n,Billiard Room,Billiard Room1,Billiard Room,Billiard Room,Billiard Room,Billiard Room,t,t,t,n,n,n,n,n,t,t,Dining Room2,Dining Room,Dining Room,Dining Room,Dining Room,Dining Room,Dining Room,Dining Room,n
+n,Billiard Room,Billiard Room,Billiard Room,Billiard Room,Billiard Room,Billiard Room,t,t,t,n,n,n,n,n,t,t,Dining Room,Dining Room,Dining Room,Dining Room,Dining Room,Dining Room,Dining Room,Dining Room,n
+n,Billiard Room,Billiard Room,Billiard Room,Billiard Room,Billiard Room,Billiard Room,t,t,t,n,n,n,n,n,t,t,Dining Room,Dining Room,Dining Room,Dining Room,Dining Room,Dining Room,Dining Room,Dining Room,n
+n,Billiard Room,Billiard Room,Billiard Room,Billiard Room,Billiard Room,Billiard Room2,t,t,t,t,t,t,t,t,t,t,t,t,t,Dining Room,Dining Room,Dining Room,Dining Room,Dining Room,n
+n,Billiard Room,Billiard Room,Billiard Room,Billiard Room,Billiard Room,Billiard Room,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,n,n
+n,n,t,t,t,t,t,t,t,Ball Room,Ball Room2,Ball Room,Ball Room,Ball Room,Ball Room,Ball Room3,Ball Room,t,t,t,t,t,t,t,t,n
+n,C,t,t,t,t,t,t,t,Ball Room,Ball Room,Ball Room,Ball Room,Ball Room,Ball Room,Ball Room,Ball Room,t,t,Kitchen1,Kitchen,Kitchen,Kitchen,Kitchen,n,n
+n,n,Conservatory@Lounge,Conservatory,Conservatory,Conservatory1,t,t,t,Ball Room1,Ball Room,Ball Room,Ball Room,Ball Room,Ball Room,Ball Room,Ball Room4,t,t,Kitchen,Kitchen,Kitchen,Kitchen,Kitchen,Kitchen,n
+n,Conservatory,Conservatory,Conservatory,Conservatory,Conservatory,Conservatory,t,t,Ball Room,Ball Room,Ball Room,Ball Room,Ball Room,Ball Room,Ball Room,Ball Room,t,t,Kitchen,Kitchen,Kitchen,Kitchen,Kitchen,Kitchen,n
+n,Conservatory,Conservatory,Conservatory,Conservatory,Conservatory,Conservatory,t,t,Ball Room,Ball Room,Ball Room,Ball Room,Ball Room,Ball Room,Ball Room,Ball Room,t,t,Kitchen,Kitchen,Kitchen,Kitchen,Kitchen,Kitchen,n
+n,Conservatory,Conservatory,Conservatory,Conservatory,Conservatory,Conservatory,t,t,Ball Room,Ball Room,Ball Room,Ball Room,Ball Room,Ball Room,Ball Room,Ball Room,t,t,Kitchen,Kitchen,Kitchen,Kitchen,Kitchen,Kitchen,n
+n,Conservatory,Conservatory,Conservatory,Conservatory,Conservatory,Conservatory,n,t,t,t,Ball Room,Ball Room,Ball Room,Ball Room,t,t,t,n,Kitchen@Study,Kitchen,Kitchen,Kitchen,Kitchen,Kitchen,n
 n,n,n,n,n,n,n,n,n,n,C,n,n,n,n,C,n,n,n,n,n,n,n,n,n,n
 n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n

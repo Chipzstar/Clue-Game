@@ -43,13 +43,13 @@ public class Game implements GameInterface {
     public enum Settings {
         CONFIG("config.properties"), BOARD("board.csv");
         
-        private static final String DEFAULT_CHARACTERS = " Miss Scarlet, Col Mustard, Prof Plum, " 
+        private static final String DEFAULT_CHARACTERS = " Miss Scarlet, Col Mustard, Prof Plum, "
                                                        + "Mrs White, Rev Green, Mrs Peacock";
-        private static final String DEFAULT_WEAPONS = "Dagger, Candle Stick, Revolver, " 
+        private static final String DEFAULT_WEAPONS = "Dagger, Candle Stick, Revolver, "
                                                     + "Rope, Spanner, Lead Piping";
         private final String representation;
         
-        private Settings(String rep) {
+        Settings(String rep) {
             this.representation = rep;
         }
           
@@ -291,7 +291,6 @@ public class Game implements GameInterface {
     public void showBoard(){
         System.out.print(b.toStringWithPlayers(playerList));
     }
-    
         public static void main(String[] args) throws IOException {
         new Game();
         }

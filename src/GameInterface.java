@@ -5,9 +5,9 @@
  */
 
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
-
 
 public interface GameInterface {
     Board b = null;
@@ -32,6 +32,18 @@ public interface GameInterface {
     * fill player list with corresponding objects
     * Game Start
     **/
+    static void clearScreen(){}
+
+    void initialise() throws FileNotFoundException;
+
+    void doSuggestion(ArrayList<MurderCard> suggestion);
+
+    void doAccusation(ArrayList<MurderCard> accusation);
+
+    void showBoard();
+
+
+
 
 
 
