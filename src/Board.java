@@ -66,6 +66,7 @@ class Board {
 							//gets room names before and after the '@'
 							String[] sRooms = val.split("@");
 							room = getRoom(sRooms[0]);
+							tiles.add(new RoomTile(x, y, room, false)); //fix 2
 							room.setShortcut(getRoom(sRooms[1]));
 						}
 						//door tiles end with a digit
@@ -98,14 +99,12 @@ class Board {
 	}
 
 	public Room getRoom(String name) {
-		Room room;
 		name = name.replaceAll("[0-9C]+", "");
 		if (!roomNames.contains(name)) {
-			room = new Room(name);
-			rooms.add(room);
+			rooms.add(new Room(name));
 			roomNames.add(name);
-		} else room = rooms.get(roomNames.indexOf(name));
-		return room;
+		} 
+		return rooms.get(roomNames.indexOf(name));
 	}
 
 	public void setSpecials() {
@@ -120,7 +119,7 @@ class Board {
 				tile = board.get(x).get(y);
 			} while (tile instanceof NullTile || tile instanceof RoomTile);
 			board.get(x).remove(y);
-			board.get(x).add(x, new SpecialTile(x, y));
+			board.get(x).add(y, new SpecialTile(x, y)); //fix 1
 		}
 	}
 
