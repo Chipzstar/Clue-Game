@@ -67,6 +67,20 @@ class Room {
         return false;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Room room = (Room) o;
+        return doors == room.doors &&
+                roomIndex == room.roomIndex &&
+                shortcut == room.shortcut &&
+                name.equals(room.name);
+    }
     /**
      *
      * @return

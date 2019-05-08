@@ -8,11 +8,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Random;
-
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * @author xxlig
@@ -24,7 +20,6 @@ class Board {
 	private int height;
 	private int width;
 	public ArrayList<Tile> startTiles;
-	private Random rand1 = new Random();
 
 	public Board() throws FileNotFoundException {
 		this.board = new ArrayList<>();
@@ -56,7 +51,7 @@ class Board {
 					case "t":
 						tiles.add(new Tile(x, y));
 						break;
-					case "C":
+					case "X":
 						tiles.add(new Tile(x, y));
 						this.startTiles.add(tiles.get(tiles.size() - 1));
 						break;
@@ -99,11 +94,11 @@ class Board {
 	}
 
 	public Room getRoom(String name) {
-		name = name.replaceAll("[0-9C]+", "");
+		name = name.replaceAll("[0-9X]+", "");
 		if (!roomNames.contains(name)) {
 			rooms.add(new Room(name));
 			roomNames.add(name);
-		} 
+		}
 		return rooms.get(roomNames.indexOf(name));
 	}
 
@@ -127,11 +122,11 @@ class Board {
 		ArrayList<Tile> adjTile = new ArrayList<>();
 		int y = t.getCoords().x;
 		int x = t.getCoords().y;
-		if (t instanceof RoomTile) {
+		/*if (t instanceof RoomTile) {
 			if (!((RoomTile) t).getIsDoor()) {
 				adjTile.addAll(((RoomTile) t).getRoom().getDoors());
 			}
-		} else {
+		} else {*/
 			if (x > 0 && board.get(x - 1).size() > y) {
 				if (landableTile(board.get(x - 1).get(y))) {
 					adjTile.add(board.get(x - 1).get(y));
@@ -152,13 +147,11 @@ class Board {
 					adjTile.add(board.get(x).get(y + 1));
 				}
 			}
-		}
 		return adjTile;
 	}
 
 	public boolean landableTile(Tile t) {
 		boolean landable = false;
-
 		if (t instanceof RoomTile) {
 			if (((RoomTile) t).getIsDoor()) {
 				landable = true;
@@ -193,7 +186,6 @@ class Board {
 						visited.add(adjacentTile);
 						boardTiles.add(adjacentTile);
 					}
-
 				}
 			}
 			i++;
@@ -202,10 +194,37 @@ class Board {
 		return hashMap;
 	}
 
-	public ArrayList<Tile> diceRoll(int value, Tile t) {
-		HashMap<Integer, ArrayList<Tile>> hashMap = getBFS(t);
+	public ArrayList<Tile> diceRoll(int value, Tile position) {
+		HashMap<Integer, ArrayList<Tile>> hashMap;
 		ArrayList<Tile> tilesInReach = new ArrayList<>();
-		for (int i = 1; i < value; i++) {
+		if(position instanceof RoomTile){
+			ArrayList<Tile> doors = ((RoomTile) position).getRoom().getDoors();
+			for(Tile t : doors) {
+				hashMap = getBFS(t);
+				tilesInReach.addAll(getReachableTiles(hashMap, value));
+			}
+		} else {
+			hashMap = getBFS(position);
+			tilesInReach = getReachableTiles(hashMap, value);
+		}
+		/*REMOVE DUPLICATES*/
+		// Create a new LinkedHashSet
+		Set<Tile> set = new LinkedHashSet<>();
+		// Add the elements to set
+		set.addAll(tilesInReach);
+		//System.out.println("Reachable tiles (Set):" +Arrays.toString(set.toArray()));
+		// Clear the list
+		tilesInReach.clear();
+		// add the elements of set  with no duplicates to the list
+		tilesInReach.addAll(set);
+		//System.out.println("Reachable tiles (ArrayList):" +Arrays.toString(tilesInReach.toArray()));
+		// return the list
+		return tilesInReach;
+	}
+
+	private ArrayList<Tile> getReachableTiles(HashMap<Integer, ArrayList<Tile>> hashMap, int value){
+		ArrayList<Tile> tilesInReach = new ArrayList<>();
+		for (int i = 1; i <= value; i++) {
 			if (i < hashMap.size()) {
 				for (Tile x : hashMap.get(i)) {
 					if (x instanceof RoomTile) {
@@ -214,32 +233,57 @@ class Board {
 				}
 			}
 		}
-		System.out.println("hashMap size = " + hashMap.size());
 		if (value < hashMap.size()) {
 			tilesInReach.addAll(hashMap.get(value));
 		}
 		return tilesInReach;
 	}
 
-	public ArrayList<String> getRooms() {
-		return this.roomNames;
-	}
-
-	public ArrayList<RoomTile> getReachableRooms(int value, Tile position) {
-		HashMap<Integer, ArrayList<Tile>> hashMap = getBFS(position);
+	private ArrayList<RoomTile> getBFSRooms( HashMap<Integer, ArrayList<Tile>> hashMap, int value){
 		ArrayList<RoomTile> roomsInReach = new ArrayList<>();
 		for (Integer i = 1; i <= value; i++) {
-			for (Tile t : hashMap.get(i)) {
-				if (t instanceof RoomTile) {
-					if (((RoomTile) t).getIsDoor()) {
-						// ensures the room tile added
-						// references the 'room index' tile
-						roomsInReach.add((RoomTile) t);
+			if (hashMap.get(i).size() > 0) {
+				for (Tile t : hashMap.get(i)) {
+					if (t instanceof RoomTile) {    //check if a reachable tile is a room
+						if (((RoomTile) t).getIsDoor()) {
+							roomsInReach.add((RoomTile) t);
+						}
 					}
 				}
 			}
 		}
 		return roomsInReach;
+	}
+
+	public ArrayList<RoomTile> getReachableRooms(int value, Tile position) {
+		HashMap<Integer, ArrayList<Tile>> hashMap;
+		//ArrayList<RoomTile> temp;
+		ArrayList<RoomTile> roomsInReach = new ArrayList<>();
+		if(position instanceof RoomTile){
+			ArrayList<Tile> doors = ((RoomTile) position).getRoom().getDoors();
+			for(Tile t : doors) {
+				hashMap = getBFS(t);
+				//System.out.println(hashMap.toString());
+				roomsInReach.addAll(getBFSRooms(hashMap, value));
+			}
+		} else {
+			hashMap = getBFS(position);
+			roomsInReach = getBFSRooms(hashMap, value);
+		}
+		//if ai is already in a room, that same room is ignored in the BFS.
+		if (position instanceof RoomTile) {
+			for (Iterator<RoomTile> itr = roomsInReach.iterator(); itr.hasNext(); ) {
+				RoomTile r = itr.next();
+				if (r.getRoom().equals(((RoomTile) position).getRoom())) {
+					itr.remove(); // right call
+				}
+			}
+		}
+		return roomsInReach;
+	}
+
+	public ArrayList<String> getRooms() {
+		return this.roomNames;
 	}
 
 	@Override
@@ -283,8 +327,7 @@ class Board {
 							s += "D ";
 						} else if (((RoomTile) tile).getRoom().getRoomIndex() == tile) {
 							s += "I#";
-						}
-                        else{
+						} else {
 							s += "  ";
 						}
 					} else if (tile instanceof SpecialTile) s += "SPEC   ";

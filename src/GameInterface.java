@@ -36,7 +36,7 @@ public interface GameInterface {
 
     void initialise() throws FileNotFoundException;
 
-    void doSuggestion(ArrayList<MurderCard> suggestion);
+    boolean doSuggestion(ArrayList<MurderCard> suggestion);
 
     void doAccusation(ArrayList<MurderCard> accusation);
 

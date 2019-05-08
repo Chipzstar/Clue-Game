@@ -21,7 +21,6 @@ class Player {
     protected Set <MurderCard> mCards;
     protected Tile position;
     protected Game g;
-    protected ArrayList<MurderCard> hand;
     protected boolean immuneToSuggestion;
     protected DetectiveCard dCard;
     protected Random randomGenerator = new Random();
@@ -32,7 +31,6 @@ class Player {
         this.position = t;
     }
 
-    
     protected void drawIntrigue(){
         IntrigueCard c = this.g.intrigueDeck.poll();
         System.out.println(c.toString());
@@ -48,16 +46,16 @@ class Player {
                 rollDiceAndMove();
                 break;
             case TELEPORT:
-                int x = 0, y = 0;
+                int x , y;
                 if (this instanceof Human) {
                     do {
-                        //this.g.b.board.toString();
+                        this.g.b.board.toString();
                         System.out.println("please enter x");
                         x = ((Human) this).getInput(this.g.b.board.size() - 1);
                         System.out.println("please enter y");
                         y = ((Human) this).getInput(this.g.b.board.get(0).size() - 1);
                         if (g.b.landableTile(this.g.b.board.get(y).get(x))){
-                            setPosition(this.g.b.board.get(y).get(x));
+                            this.setPosition(this.g.b.board.get(y).get(x));
                             break;
                         } else {
                             System.err.println("You are not permitted to teleport to this tile!");
@@ -67,17 +65,16 @@ class Player {
                     do {
                         x = randomGenerator.nextInt(this.g.b.board.size() - 1);
                         y = randomGenerator.nextInt(this.g.b.board.get(0).size() - 1);
-                    } while (g.b.landableTile(this.g.b.board.get(x).get(y)));
-                    setPosition(this.g.b.board.get(x).get(y));
+                    } while (!(g.b.landableTile(this.g.b.board.get(x).get(y))));
+                    this.setPosition(this.g.b.board.get(x).get(y));
                 }
         }
     }
 
-    
-    public void revealCards( ArrayList <MurderCard> revealed){};
-    public void doTurn(){};
+    public void revealCards(ArrayList<MurderCard> revealed){}
+    public void doTurn(){}
     public MurderCard answerSuggestion(ArrayList<MurderCard> suggestion){return null;}
-    public void rollDiceAndMove(){};
+    public void rollDiceAndMove(){}
     //turnStart -> roll, stay or use shortcut
     //roll -> move
     //if in room -> make a suggestion?
