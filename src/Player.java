@@ -71,10 +71,11 @@ class Player {
         }
     }
 
-    public void revealCards(ArrayList<MurderCard> revealed){}
+    public void revealCards(ArrayList<MurderCard> revealed, ArrayList<MurderCard> suggestion){}
     public void doTurn(){}
     public MurderCard answerSuggestion(ArrayList<MurderCard> suggestion){return null;}
     public void rollDiceAndMove(){}
+    public void updateDetectiveCard(ArrayList<MurderCard> cards) {}
     //turnStart -> roll, stay or use shortcut
     //roll -> move
     //if in room -> make a suggestion?

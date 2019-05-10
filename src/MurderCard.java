@@ -23,7 +23,18 @@ class MurderCard {
     public String toString(){
         return this.name;
     }
-      
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        MurderCard mCard = (MurderCard) o;
+        return this.name == mCard.name;
+    }
 }
 
 class WeaponMCard extends MurderCard{  

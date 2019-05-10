@@ -19,7 +19,7 @@ class DetectiveCard {
         MARK("X"),BLANK("_");
         private String representation;
 
-        private Mark(String s) {
+        Mark(String s) {
             this.representation = s;
         }
 
@@ -112,15 +112,15 @@ class DetectiveCard {
 
 
     public String toString(){
-        String s = "Detective Card\n=============================\nWEAPONS\n";
+        String s = "\t\tDetective Card\n=============================\n\t\tWEAPONS\n";
         for(MurderCard m: weapons.keySet()){
             s+= m.name+": "+ weapons.get(m).representation.toString()+"\n";
         }
-        s+="ROOMS\n";
+        s+="\t\tROOMS\n";
         for(MurderCard m: rooms.keySet()){
             s+= m.name+": "+ rooms.get(m).representation.toString()+"\n";
         }
-        s+="CHARACTERS\n";
+        s+="\t\tCHARACTERS\n";
         for(MurderCard m: characters.keySet()){
             s+= m.name+": "+ characters.get(m).representation.toString()+"\n";
         }

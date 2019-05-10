@@ -59,8 +59,6 @@ public class Human extends Player {
 
 	@Override
 	public void doTurn() {
-		//make move
-		revealCards(new ArrayList<>(this.mCards));
 		clearScreen();
 		g.showBoard();
 		System.out.println(toString());
@@ -116,7 +114,7 @@ public class Human extends Player {
 	}
 
     @Override
-    public void revealCards(ArrayList<MurderCard> revealed){
+    public void revealCards(ArrayList<MurderCard> revealed, ArrayList<MurderCard> suggestion){
         if(revealed.size() > 0){
             System.out.println("Revealed Cards: "+revealed.size());
             for(MurderCard m: revealed){
@@ -127,6 +125,13 @@ public class Human extends Player {
             }
         }
     }
+
+	@Override
+	public void updateDetectiveCard(ArrayList<MurderCard> cards){
+		for (MurderCard m : cards) {
+			this.dCard.mark(m.toString());
+		}
+	}
 
 	private void makeMove() {
 		int choice = -1;

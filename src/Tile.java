@@ -30,6 +30,18 @@ class Tile {
     public Coords getCoords(){return c;}
     @Override
     public String toString(){return this.getClass().getSimpleName()+ "  x:"+c.x+"   y:"+c.y;}
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Tile tile = (Tile) o;
+        return c.x == tile.c.x && c.y == tile.c.y;
+    }
 }
 
 class RoomTile extends Tile{

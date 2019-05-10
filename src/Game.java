@@ -141,7 +141,7 @@ public class Game implements GameInterface {
 	public void initialise() throws FileNotFoundException {
 		//Loads config, loads defaults if characters and/or weapons are missing
 		//getProperty() returns String[], so is converted to fixed-size list,
-		//fixed array lists can,t have anything removed so is used to constuct arraylists
+		//fixed array lists can,t have anything removed so is used to construct arraylists
 		List<String> characters = new ArrayList<>(Arrays.asList(config.getProperty("Characters", Settings.DEFAULT_CHARACTERS).split(",")));
 		List<String> weapons = new ArrayList<>(Arrays.asList(config.getProperty("Weapons", Settings.DEFAULT_WEAPONS).split(",")));
 		ArrayList<MurderCard> mCards;
@@ -149,8 +149,7 @@ public class Game implements GameInterface {
 		this.b = new Board();
 		//System.out.println(b.toString());
 
-		int numPlayers;
-		int numAI = 0, diff = 0;
+		int numPlayers, numAI = 0, diff = 0;
 		//makes sure player and ai number is between 2 and 6
 		do {
 			System.out.print("Number of Human players: ");
@@ -255,6 +254,10 @@ public class Game implements GameInterface {
 
 	private void playGame() {
 		System.out.println("MURDER SOLUTION CARDS: "+ Arrays.toString(solution.toArray())+"\n");
+		//Update Detective cards
+		for (Player p : playerList){
+			p.updateDetectiveCard(new ArrayList<>(p.mCards));
+		}
 		do {
 			System.out.println("****************************************************************");
 			System.out.println("\t\t\t\tTURN "+ ++counter+"#");
@@ -280,7 +283,11 @@ public class Game implements GameInterface {
 			}
 		}
 		cardsRevealed.removeIf(Objects::isNull);
-		playerList.get(0).revealCards(cardsRevealed);
+		System.out.println("Revealed Cards: " + cardsRevealed.size());
+		System.out.println(Arrays.toString(cardsRevealed.toArray()));
+		for (int i = 0; i < playerList.size(); i++) {
+			playerList.get(i).revealCards(cardsRevealed, suggestion);
+		}
 		return cardsRevealed.size() == 0;
 	}
 

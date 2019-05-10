@@ -25,6 +25,8 @@ public class AI extends Player {
 		}
 	}
 
+	private ArrayList<MurderCard> suggestion;
+	private ArrayList<MurderCard> cardsToSuggest;
 	private boolean isAccusation;
 	private Difficulty level;
 
@@ -44,6 +46,8 @@ public class AI extends Player {
 		this.level = l;
 		this.immuneToSuggestion = false;
 		this.isAccusation = false;
+		this.cardsToSuggest = new ArrayList<>();
+		this.suggestion = new ArrayList<>();
 	}
 
 	public static void clearScreen() {
@@ -56,19 +60,17 @@ public class AI extends Player {
 
 	@Override
 	public void doTurn() {
-		revealCards(new ArrayList<>(this.mCards));
-		System.out.println();
 		clearScreen();
-		//g.showBoard();
+		g.showBoard();
 		System.out.println(toString());
 		System.out.println("\n" + this.dCard.toString());
 		switch (level) {
 			case EASY:
 				rollDiceAndMove();
 				if (this.position instanceof RoomTile) {
-					ArrayList<MurderCard> suggestion = makeSuggestion();
+					this.suggestion = makeSuggestion();
 					if (isAccusation) {
-						makeAccusation(suggestion);
+						makeAccusation(this.suggestion);
 					}
 				}
 				break;
@@ -78,35 +80,17 @@ public class AI extends Player {
 			//if so, AI uses shortcut
 			//else AI rolls dice and moves
 			case MEDIUM:
-				ArrayList<MurderCard> suggestion;
+				rollDiceAndMove();
 				if (this.position instanceof RoomTile) {
 					if (this.dCard.rooms.get(this.dCard.getRoomMCard(((RoomTile) this.position).getRoom().getName())).equals(DetectiveCard.Mark.BLANK)) {
-						suggestion = makeSuggestion();
+						this.suggestion = makeSuggestion();
 						if (isAccusation) {
-							makeAccusation(suggestion);
+							makeAccusation(this.suggestion);
 						}
 					} else if (((RoomTile) this.position).getRoom().getShortcut() != null) {
 						if (this.dCard.rooms.get(this.dCard.getRoomMCard(((RoomTile) this.position).getRoom().getShortcut().getName())).equals(DetectiveCard.Mark.BLANK)) {
 							useShortcut((RoomTile) this.position);
 						}
-					} else {
-						rollDiceAndMove();
-						if (this.position instanceof RoomTile) {
-							suggestion = makeSuggestion();
-							if (isAccusation) {
-								makeAccusation(suggestion);
-							}
-						}
-					}
-				} else {
-					rollDiceAndMove();
-					if (this.position instanceof RoomTile) {
-						suggestion = makeSuggestion();
-						if (isAccusation) {
-							makeAccusation(suggestion);
-						}
-					} else if (this.position instanceof SpecialTile) {
-						this.drawIntrigue();
 					}
 				}
 				break;
@@ -119,13 +103,36 @@ public class AI extends Player {
 	 * revealing their cards in response to the current AI's suggestion
 	 */
 	@Override
-	public void revealCards(ArrayList<MurderCard> revealed) {
+	public void revealCards(ArrayList<MurderCard> revealed, ArrayList<MurderCard> suggestion) {
 		if (revealed.size() > 0) {
-			System.out.println("Revealed Cards: " + revealed.size());
-			System.out.println(Arrays.toString(revealed.toArray()));
+			//Puts a mark on all revealed cards on the D-card
 			for (MurderCard m : revealed) {
 				this.dCard.mark(m.toString());
 			}
+			//Checks if a card that was suggested was not revealed by any player
+			for (MurderCard m : suggestion) {
+				if (!revealed.contains(m)) {
+					this.cardsToSuggest.add(m);
+				}
+			}
+			//Checks if a "card to suggest" has been marked on D-card, remove that card from cards to suggest;
+			for (Iterator<MurderCard> itr = this.cardsToSuggest.iterator(); itr.hasNext(); ) {
+				MurderCard m = itr.next();
+				if (this.dCard.getCharacterMCards().contains(m) && this.dCard.characters.get(m).equals(DetectiveCard.Mark.MARK)) {
+					itr.remove();
+				} else if (this.dCard.getWeaponMCards().contains(m) && this.dCard.weapons.get(m).equals(DetectiveCard.Mark.MARK)) {
+					itr.remove();
+				} else if (this.dCard.getRoomMCards().contains(m) && this.dCard.rooms.get(m).equals(DetectiveCard.Mark.MARK)) {
+					itr.remove();
+				}
+			}
+		}
+	}
+
+	@Override
+	public void updateDetectiveCard(ArrayList<MurderCard> cards) {
+		for (MurderCard m : cards) {
+			this.dCard.mark(m.toString());
 		}
 	}
 
@@ -246,49 +253,37 @@ public class AI extends Player {
 				System.out.println(Arrays.toString(suggestion.toArray()));
 				break;
 			//Medium mode:
-			//AI checks if a character in dCard is unmarked
-			//AI checks if any unmarked characters are not in AI's 'current hand'
-			//AI selects character card that is unmarked and not in 'current hand'
+			// AI checks the cardsToSuggest bank to see if any cards should be suggested
+			// AI checks if a character in dCard is unmarked
 			//Same two checks carried out for the weapons
 			//selected weapon and character cards are added to suggestion
 			case MEDIUM:
-				ArrayList<MurderCard> blankCards = new ArrayList<>();
-				for (MurderCard card : this.dCard.characters.keySet()) {
-					if (this.dCard.characters.get(card).equals(DetectiveCard.Mark.BLANK)) {
-						if (!this.mCards.contains(card)) {
-							suggestion.add(card);
-							break;
-						}
-						blankCards.add(card);
-					}
-					//if all characters that are unmarked are in the AI's holding hand....
-					//AI picks a random character that is unmarked
-					if(blankCards.isEmpty()){
-						List<MurderCard> keysAsArray = new ArrayList<>(this.dCard.characters.keySet());
-						suggestion.add(keysAsArray.get(randomGenerator.nextInt(keysAsArray.size())));
-					} else {
-						suggestion.add(blankCards.get(randomGenerator.nextInt(blankCards.size())));
+				System.out.println("HINTS: " + Arrays.toString(this.cardsToSuggest.toArray()));
+				MurderCard c = null;
+				MurderCard w = null;
+				MurderCard r = dCard.getRoomMCard(((RoomTile) this.position).getRoom().getName());
+				//Character cards
+				for (MurderCard card : this.cardsToSuggest) {
+					if (card instanceof CharacterMCard) {
+						c = card;
+						break;
 					}
 				}
-				for (MurderCard card : this.dCard.weapons.keySet()) {
-					blankCards = new ArrayList<>();
-					if (this.dCard.weapons.get(card).equals(DetectiveCard.Mark.BLANK)) {
-						if (!this.mCards.contains(card)) {
-							suggestion.add(card);
-							break;
-						}
-						blankCards.add(card);
-					}
-					//if all weapons that are unmarked are in the AI's holding hand....
-					//AI picks a random weapon that is unmarked
-					if(blankCards.isEmpty()){
-						List<MurderCard> keysAsArray = new ArrayList<>(this.dCard.weapons.keySet());
-						suggestion.add(keysAsArray.get(randomGenerator.nextInt(keysAsArray.size())));
-					} else {
-						suggestion.add(blankCards.get(randomGenerator.nextInt(blankCards.size())));
+				//Weapon cards
+				for (MurderCard card : this.cardsToSuggest) {
+					if (card instanceof WeaponMCard) {
+						w = card;
+						break;
 					}
 				}
-				suggestion.add(dCard.getRoomMCard(((RoomTile) this.position).getRoom().getName()));
+				if (c == null) c = getCardToSuggest(this.dCard.getCharacterMCards(), this.dCard.characters);
+
+				if (w == null) w = getCardToSuggest(this.dCard.getWeaponMCards(), this.dCard.weapons);
+
+				//Add cards to final suggestion
+				suggestion.add(c);
+				suggestion.add(w);
+				suggestion.add(r);
 				System.out.println(Arrays.toString(suggestion.toArray()));
 				break;
 			//Hard Mode:
@@ -313,7 +308,7 @@ public class AI extends Player {
 		clearScreen();
 		System.out.println(toString());
 		ArrayList<MurderCard> matches = new ArrayList<>();
-		System.out.println("\nCalled Suggestion: "+Arrays.toString(suggestion.toArray()));
+		System.out.println("\nCalled Suggestion: " + Arrays.toString(suggestion.toArray()));
 
 		for (MurderCard m : suggestion) {
 			if (mCards.contains(m)) {
@@ -337,6 +332,17 @@ public class AI extends Player {
 		}
 	}
 
+	private MurderCard getCardToSuggest(List<MurderCard> cards, HashMap<MurderCard, DetectiveCard.Mark> category) {
+		MurderCard card;
+		Random random = new Random();
+		int rand;
+		do {
+			rand = random.nextInt(cards.size());
+			card = cards.get(rand);
+		} while (!category.get(card).equals(DetectiveCard.Mark.BLANK));
+		return card;
+	}
+
 	@Override
 	public String toString() {
 		String s = "AI player: " + name + "\nDiff: " + this.level.toString() + "\n" + "Location: ";
@@ -349,8 +355,8 @@ public class AI extends Player {
 	}
 
 	private boolean hasSpecialTile(ArrayList<Tile> tiles) {
-		for(Tile t : tiles)
-			if(t instanceof SpecialTile)
+		for (Tile t : tiles)
+			if (t instanceof SpecialTile)
 				return true;
 		return false;
 	}
