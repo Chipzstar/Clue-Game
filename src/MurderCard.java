@@ -37,18 +37,27 @@ class MurderCard {
     }
 }
 
+/**
+ * Weapon Card subclass
+ */
 class WeaponMCard extends MurderCard{  
     public WeaponMCard(String name) {
         super(name);
     }   
 }
 
+/**
+ * Character Card subclass
+ */
 class CharacterMCard extends MurderCard{   
     public CharacterMCard(String name) {
         super(name);
     }    
 }
 
+/**
+ * Room Card subclass
+ */
 class RoomMCard extends MurderCard{   
     public RoomMCard(String name) {
         super(name);

@@ -8,17 +8,27 @@
 import java.util.Random;
 /**
  *
- * @author its your boi
+ * @author Group 18
  */
 public class Dice {
     private Random randomGenerator = new Random();
     private int sides;
     private int noOfDie;
-    
+
+    /**
+     * Dice Constructor
+     * @param s
+     * @param n
+     */
     public Dice(int s,int n){
         this.sides = s;
         this.noOfDie = n;
     }
+
+    /**
+     * Allows player to simulate a dice roll
+     * @return
+     */
     public int roll() {
         int r = 0;
         for(int i = 0; i < noOfDie; i++){

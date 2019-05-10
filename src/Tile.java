@@ -11,7 +11,10 @@
  */
 
 class Tile {
-    
+
+    /**
+     * Coordinates to uniquely identify the position of the tile on the game board
+     */
     protected class Coords{
         public int x;
         public int y;
@@ -20,9 +23,14 @@ class Tile {
             this.x = y;
         }
     }
-      
+
     protected Coords c;
-    
+
+    /**
+     * Tile Constructor
+     * @param x
+     * @param y
+     */
     public Tile(int x, int y){
         this.c = new Coords(x,y);
     } 
@@ -44,6 +52,9 @@ class Tile {
     }
 }
 
+/**
+ * Sub class of Tile. Only created if Tile contains a room
+ */
 class RoomTile extends Tile{
     private Room r;
     private boolean isDoor;
@@ -66,12 +77,18 @@ class RoomTile extends Tile{
     
 }
 
+/**
+ * Sub class of Tile. Only created if Tile is a Special tile
+ */
 class SpecialTile extends Tile{  
     public SpecialTile(int x, int y) {
         super(x, y);
     }  
 }
 
+/**
+ * Sub class of tile. Only created if the tile is not a landable tiles for players on the board.
+ */
 class NullTile extends Tile{   
     public NullTile(int x, int y) {
         super(x, y);

@@ -42,7 +42,7 @@ class Room {
     }
 
     /**
-     *
+     * Sets the main entry door of the room
      * @param t
      * @return
      */
@@ -55,7 +55,7 @@ class Room {
     }
 
     /**
-     *
+     *  Adds a door tile to the current room
      * @param t
      * @return
      */
@@ -82,7 +82,7 @@ class Room {
                 name.equals(room.name);
     }
     /**
-     *
+     * Gets a list of all doors in the current room
      * @return
      */
     public ArrayList<Tile> getDoors(){return doors;}

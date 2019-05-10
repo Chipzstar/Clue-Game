@@ -50,6 +50,9 @@ public class AI extends Player {
 		this.suggestion = new ArrayList<>();
 	}
 
+	/**
+	 * Clears the screen
+	 */
 	public static void clearScreen() {
 		try {
 			new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
@@ -102,6 +105,8 @@ public class AI extends Player {
 	/**
 	 * This method should ONLY be called after all players have finished
 	 * revealing their cards in response to the current AI's suggestion
+	 * @param revealed
+	 * @param suggestion
 	 */
 	@Override
 	public void revealCards(ArrayList<MurderCard> revealed, ArrayList<MurderCard> suggestion) {
@@ -216,9 +221,11 @@ public class AI extends Player {
 		}
 	}
 
+
 	private void useShortcut(RoomTile position) {
 		this.setPosition(position.getRoom().getShortcut().getRoomIndex());
 	}
+
 
 	public ArrayList<MurderCard> makeSuggestion() {
 		ArrayList<MurderCard> suggestion = new ArrayList<>();
@@ -363,11 +370,3 @@ public class AI extends Player {
 		return false;
 	}
 }
-
-/*
-class Easy extends AI{
-    public Easy(Difficulty l) {
-        super(name, mCards, t, g, d, l);
-    }
-}
- */

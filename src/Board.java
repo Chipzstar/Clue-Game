@@ -41,6 +41,11 @@ class Board {
 		}
 	}
 
+	/**
+	 * Loads the board, represented as a List (rows) of Lists (columns) of Tile objects, by scanning each character in the Board.csv file.
+	 * Depending on what character the scanner reads next will determine what type of tile is added to 'board';
+	 * @param scanner
+	 */
 	public final void loadBoard(Scanner scanner) {
 		int x = 0, y = 0;
 		String[] vals;
@@ -100,6 +105,12 @@ class Board {
 		scanner.close();
 	}
 
+	/**
+	 * Creates a room object based on the name parameter passed in. If a room with that name already exists
+	 * that room is returned instead.
+	 * @param name defines what the room is. Used to uniquely identify each room
+	 * @return room object
+	 */
 	public Room getRoom(String name) {
 		name = name.replaceAll("[0-9X]+", "");
 		if (!roomNames.contains(name)) {
@@ -109,6 +120,9 @@ class Board {
 		return rooms.get(roomNames.indexOf(name));
 	}
 
+	/**
+	 * Sets all the special tiles in the board.
+	 */
 	public void setSpecials() {
 		Random rand = new Random();
 		Tile tile;
@@ -125,6 +139,11 @@ class Board {
 		}
 	}
 
+	/**
+	 * Gets all the tiles that are 1 coordinate away from a given tile
+	 * @param t
+	 * @return list of adjacent tiles
+	 */
 	public ArrayList<Tile> getAdjTiles(Tile t) {
 		ArrayList<Tile> adjTile = new ArrayList<>();
 		int y = t.getCoords().x;
@@ -157,6 +176,11 @@ class Board {
 		return adjTile;
 	}
 
+	/**
+	 * Checks if a given tile can be landed on.
+	 * @param t
+	 * @return true if the tile can be landed on, false otherwise
+	 */
 	public boolean landableTile(Tile t) {
 		boolean landable = false;
 		if (t instanceof RoomTile) {
@@ -174,6 +198,7 @@ class Board {
 	}
 
 	/**
+	 * Carries out a Breadth First Search traversal across the whole board starting from a given tile s
 	 * @param s
 	 * @return
 	 */
@@ -201,6 +226,12 @@ class Board {
 		return hashMap;
 	}
 
+	/**
+	 * Called whenever a Human player decides to roll a dice and move
+	 * @param value dice roll value
+	 * @param position current position of player
+	 * @return list of tiles that the player can move to
+	 */
 	public ArrayList<Tile> diceRoll(int value, Tile position) {
 		HashMap<Integer, ArrayList<Tile>> hashMap;
 		ArrayList<Tile> tilesInReach = new ArrayList<>();
@@ -229,6 +260,12 @@ class Board {
 		return tilesInReach;
 	}
 
+	/**
+	 * Called whenever an AI player decides to roll a dice and move
+	 * @param hashMap BFSearch of all possible tile locations (values) for each dice roll value (keys)
+	 * @param value dice roll value
+	 * @return list of tiles that AI can move to
+	 */
 	private ArrayList<Tile> getReachableTiles(HashMap<Integer, ArrayList<Tile>> hashMap, int value){
 		ArrayList<Tile> tilesInReach = new ArrayList<>();
 		for (int i = 1; i <= value; i++) {
@@ -246,22 +283,12 @@ class Board {
 		return tilesInReach;
 	}
 
-	private ArrayList<RoomTile> getBFSRooms( HashMap<Integer, ArrayList<Tile>> hashMap, int value){
-		ArrayList<RoomTile> roomsInReach = new ArrayList<>();
-		for (Integer i = 1; i <= value; i++) {
-			if (hashMap.get(i).size() > 0) {
-				for (Tile t : hashMap.get(i)) {
-					if (t instanceof RoomTile) {    //check if a reachable tile is a room
-						if (((RoomTile) t).getIsDoor()) {
-							roomsInReach.add((RoomTile) t);
-						}
-					}
-				}
-			}
-		}
-		return roomsInReach;
-	}
-
+	/**
+	 * Called by AI player to check if any rooms are in reach from current position
+	 * @param value dice roll value
+	 * @param position current tile position
+	 * @return list or reachable rooms
+	 */
 	public ArrayList<RoomTile> getReachableRooms(int value, Tile position) {
 		HashMap<Integer, ArrayList<Tile>> hashMap;
 		//ArrayList<RoomTile> temp;
@@ -289,10 +316,40 @@ class Board {
 		return roomsInReach;
 	}
 
+	/**
+	 * Called by getReachableRooms function to get rooms in reach
+	 * @param hashMap
+	 * @param value
+	 * @return
+	 */
+	private ArrayList<RoomTile> getBFSRooms( HashMap<Integer, ArrayList<Tile>> hashMap, int value){
+		ArrayList<RoomTile> roomsInReach = new ArrayList<>();
+		for (Integer i = 1; i <= value; i++) {
+			if (hashMap.get(i).size() > 0) {
+				for (Tile t : hashMap.get(i)) {
+					if (t instanceof RoomTile) {    //check if a reachable tile is a room
+						if (((RoomTile) t).getIsDoor()) {
+							roomsInReach.add((RoomTile) t);
+						}
+					}
+				}
+			}
+		}
+		return roomsInReach;
+	}
+
+	/**
+	 * Gets a list of all room names on the board
+	 * @return
+	 */
 	public ArrayList<String> getRooms() {
 		return this.roomNames;
 	}
 
+	/**
+	 * Generates a string representation of the board. Can be printed out on the console
+	 * @return
+	 */
 	@Override
 	public String toString() {
 		String s = "";
@@ -315,6 +372,12 @@ class Board {
 		return s;
 	}
 
+	/**
+	 * Generates a string representation of the board including the current positions of all players.
+	 * Can be printed out on the console
+	 * @param PL list of players
+	 * @return
+	 */
 	public String toStringWithPlayers(ArrayList<Player> PL) {
 		String s = "";
 		HashMap<Tile, Player> tileLocation = new HashMap<>();

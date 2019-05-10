@@ -7,6 +7,7 @@
 
 import java.awt.Desktop;
 
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -15,7 +16,10 @@ import java.io.IOException;
 
 import java.util.*;
 
-
+/**
+ *
+ * @author Group 18
+ */
 public class Game implements GameInterface {
 
 	public static final String ANSI_RESET = "\u001B[0m";
@@ -25,6 +29,9 @@ public class Game implements GameInterface {
 	public static final String ANSI_YELLOW = "\u001B[33m";
 	public static final String ANSI_PURPLE = "\u001B[35m";
 
+	/**
+	 *
+	 */
 	public static void clearScreen() {
 		try {
 			new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
@@ -33,7 +40,9 @@ public class Game implements GameInterface {
 		}
 	}
 
-	//default config settings
+	/**
+	 * Default Settings
+	 */
 	public enum Settings {
 		CONFIG("config.properties"), BOARD("board.csv");
 
@@ -69,7 +78,11 @@ public class Game implements GameInterface {
 
 	public static Random rand = new Random();
 
-	//loads config file
+	/**
+	 * Game Constructor
+	 * @throws IOException
+	 */
+
 	public Game() throws IOException {
 		this.input = new Scanner(System.in);
 		this.config = new Properties();
@@ -91,7 +104,11 @@ public class Game implements GameInterface {
 
 	}
 
-	//can remove for javafx
+	/**
+	 * Provides the console menu interface listing options for the user to either start the game, load a game, edit settings,
+	 * reset settings back to default or Quit.
+	 * @throws IOException
+	 */
 	private void menu() throws IOException {
 		while (true) {
 			clearScreen();
@@ -133,6 +150,12 @@ public class Game implements GameInterface {
 		}
 	}
 
+	/**
+	 * Load the default settings to initiate the Game and game board.
+	 * @param setting
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
 	private void loadDefaults(Settings setting) throws FileNotFoundException, IOException {
 		switch (setting) {
 			case CONFIG:
@@ -145,6 +168,13 @@ public class Game implements GameInterface {
 		}
 	}
 
+	/**
+	 * Init method that creates all the objects required to play the game. Such as:
+	 * - generating list of player objects
+	 * - loading the the board and dice objects
+	 * - generating list Murder cards
+	 * @throws FileNotFoundException
+	 */
 	public void initialise() throws FileNotFoundException {
 		//Loads config, loads defaults if characters and/or weapons are missing
 		//getProperty() returns String[], so is converted to fixed-size list,
@@ -213,10 +243,15 @@ public class Game implements GameInterface {
 		}
 		//showCards(mCards);
 		deal(mCards);
-		showPlayerCards();
 		playGame();
 	}
 
+	/**
+	 * Organises all murder cards by the category: Weapon, Character and Room
+	 * @param names name of the card
+	 * @param type
+	 * @return
+	 */
 	private ArrayList<MurderCard> genCards(List<String> names, String type) {
 		ArrayList<MurderCard> cards = new ArrayList<>();
 		names.forEach((String name) -> {
@@ -229,6 +264,10 @@ public class Game implements GameInterface {
 		return cards;
 	}
 
+	/**
+	 *  Deals all the cards to all current players
+	 * @param cards
+	 */
 	private void deal(ArrayList<MurderCard> cards) {
 		int highest = 0, dealer = 0, index, roll;
 		cards.removeAll(solution); // removes solution cards from deck
@@ -248,6 +287,9 @@ public class Game implements GameInterface {
 		}
 	}
 
+	/**
+	 * Generates the Intrigue cards
+	 */
 	private void initialiseIntrigue() {
 		for (int i = 0; i < 2; i++) {
 			intrigueDeck.add(new IntrigueCard(IntrigueCard.IntrigueCardType.AVOIDSUGGESTION));
@@ -258,6 +300,13 @@ public class Game implements GameInterface {
 		Collections.shuffle(intrigueDeck);
 	}
 
+	/**
+	 * Used for retrieving user inputs throughout the game and checking that they are within in range or are reasonable
+	 * @param minVal
+	 * @param maxVal
+	 * @param message
+	 * @return
+	 */
 	private int getInput(int minVal, int maxVal, String message) {
 		int val;
 		val = input.nextInt();
@@ -269,6 +318,9 @@ public class Game implements GameInterface {
 		return val;
 	}
 
+	/**
+	 *  MAIN FUNCTION TO START THE GAME
+	 */
 	private void playGame() {
 		System.out.println(ANSI_PURPLE + "MURDER SOLUTION CARDS: "+ Arrays.toString(solution.toArray())+"\n" + ANSI_RESET);
 		border();
@@ -290,6 +342,11 @@ public class Game implements GameInterface {
 		System.out.println("MURDER SOLUTION CARDS: "+ Arrays.toString(solution.toArray())+"\n");
 	}
 
+	/**
+	 *  Controls functionality for made suggestions by players
+	 * @param suggestion
+	 * @return
+	 */
 	public boolean doSuggestion(ArrayList<MurderCard> suggestion) {
 		ArrayList<MurderCard> cardsRevealed = new ArrayList<>();
 		for (int i = 1; i < playerList.size(); i++) {
@@ -308,6 +365,10 @@ public class Game implements GameInterface {
 		return cardsRevealed.size() == 0;
 	}
 
+	/**
+	 *  Controls functionality for made accusations by players
+	 * @param accusation
+	 */
 	public void doAccusation(ArrayList<MurderCard> accusation) {
 		if (solution.containsAll(accusation)) {
 			System.out.println(playerList.get(0).name + " has guessed correctly");
@@ -332,6 +393,9 @@ public class Game implements GameInterface {
 		}
 	}
 
+	/**
+	 *  Prints out a string representation of the board to the console
+	 */
 	public void showBoard() {
 		System.out.print(b.toStringWithPlayers(playerList));
 	}
@@ -343,17 +407,15 @@ public class Game implements GameInterface {
 		System.out.println(ANSI_YELLOW + "All Room cards:" + Arrays.toString(d.getRoomMCards().toArray()) + ANSI_RESET);
 	}*/
 
-	private void showPlayerCards(){
-		int counter = 0;
-		for (Player p : playerList) {
-			System.out.println(ANSI_YELLOW + "Player "+ ++counter + " Hand: "+ Arrays.toString(p.mCards.toArray()) + ANSI_RESET);
-		}
-	}
-
 	private void border(){
 		System.out.println(ANSI_BLUE +"*******************************************************************" + ANSI_RESET);
 	}
 
+	/**
+	 *  Main class
+	 * @param args
+	 * @throws IOException
+	 */
 	public static void main(String[] args) throws IOException {
 		new Game();
 	}

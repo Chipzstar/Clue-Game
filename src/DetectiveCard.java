@@ -33,7 +33,10 @@ class DetectiveCard {
     HashMap<MurderCard,Mark> rooms;
     HashMap<MurderCard,Mark> characters;
 
-
+    /**
+     * Constructor
+     * @param cards
+     */
     public DetectiveCard(ArrayList<MurderCard> cards){
         weapons = new HashMap<>();
         rooms = new HashMap<>();
@@ -45,6 +48,11 @@ class DetectiveCard {
         }
     }
 
+    /**
+     * Places mark on the Detective card
+     * @param s
+     * @return
+     */
     public boolean mark(String s){
         for(MurderCard w: weapons.keySet()){
             if(s == w.toString()){
@@ -67,6 +75,11 @@ class DetectiveCard {
         return false;
     }
 
+    /**
+     * Removes a mark on the Detective card
+     * @param s
+     * @return
+     */
     public boolean unmark(String s){
         for(MurderCard w: weapons.keySet()){
             if(s == w.toString()){
@@ -89,18 +102,35 @@ class DetectiveCard {
         return false;
     }
 
+    /**
+     * Gets all the Weapon cards
+     * @return
+     */
     public ArrayList<MurderCard> getWeaponMCards(){
         return new ArrayList<MurderCard>(weapons.keySet());
     }
 
+    /**
+     * Gets all the Room cards
+     * @return
+     */
     public ArrayList<MurderCard> getRoomMCards(){
         return new ArrayList<MurderCard>(rooms.keySet());
     }
 
+    /**
+     * Gets all the Character cards
+     * @return
+     */
     public ArrayList<MurderCard> getCharacterMCards(){
         return new ArrayList<MurderCard>(characters.keySet());
     }
 
+    /**
+     * Gets the Room card that has the given name
+     * @param s name of the room
+     * @return
+     */
     public MurderCard getRoomMCard (String s){
         for(MurderCard r: rooms.keySet()){
             if(r.name == s){
@@ -110,7 +140,10 @@ class DetectiveCard {
         return null;
     }
 
-
+    /**
+     * Provides a string representation of the Detective card. Can be printed out on the console.
+     * @return
+     */
     public String toString(){
         String s = "\t\tDetective Card\n=============================\n\t\tCHARACTERS\n";
         for(MurderCard m: characters.keySet()){

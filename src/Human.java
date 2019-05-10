@@ -168,9 +168,6 @@ public class Human extends Player {
 		}
 	}
 
-	/**
-	 *
-	 */
 	public void useShortcut() {
 		System.out.println(this.name + " has used Shortcut: " + ((RoomTile) this.position).getRoom().getName()+" -> "+((RoomTile) this.position).getRoom().getShortcut().getName());
 		setPosition(((RoomTile) this.position).getRoom().getShortcut().getRoomIndex());
@@ -179,7 +176,7 @@ public class Human extends Player {
 	/**
 	 * @return
 	 */
-	public void makeSuggestion() {
+	public ArrayList<MurderCard> makeSuggestion() {
 		ArrayList<MurderCard> suggestion = new ArrayList<>();
 		System.out.println(this.dCard.toString());
 		//WEAPONS
@@ -199,6 +196,7 @@ public class Human extends Player {
 		System.out.print("Selection: ");
 		suggestion.add(temp.get(getInput(temp.size() - 1)));
 		this.g.doSuggestion(suggestion);
+		return suggestion;
 	}
 
 	/**

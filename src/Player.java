@@ -71,15 +71,49 @@ class Player {
         }
     }
 
+    /**
+     * Reveals all the cards after for the current player's suggestion
+     */
     public void revealCards(ArrayList<MurderCard> revealed, ArrayList<MurderCard> suggestion){}
-    public void doTurn(){}
-    public MurderCard answerSuggestion(ArrayList<MurderCard> suggestion){return null;}
-    public void rollDiceAndMove(){}
-    public void updateDetectiveCard(ArrayList<MurderCard> cards) {}
-    //turnStart -> roll, stay or use shortcut
-    //roll -> move
-    //if in room -> make a suggestion?
-    //can make accusation
 
+    /**
+     * Controls the whole turn of player
+     */
+    public void doTurn(){}
+
+    public MurderCard answerSuggestion(ArrayList<MurderCard> suggestion){return null;}
+
+    /**
+     * Main function for controlling the AI dice roll and movement
+     */
+    public void rollDiceAndMove(){}
+
+    /**
+     * Puts a mark on all cards on the detective card that match a card in the player's holding hand
+     * @param cards
+     */
+    public void updateDetectiveCard(ArrayList<MurderCard> cards) {}
+    
+    /**
+     * Controls functionality for making a suggestion
+     * @return
+     */
+    public ArrayList<MurderCard> makeSuggestion(){ return null;}
+
+    /**
+     * Controls functionality for making an accusation
+     * @param accusation
+     * @return
+     */
+    public void makeAccusation(ArrayList<MurderCard> accusation){}
+
+    /**
+     * Returns a String representation of the current player's status in the game. i.e.
+     *  - Player name
+     *  - Detective card
+     *  - Current tile position
+     * @return
+     */
+    public String toString(){ return null; }
 
 }
