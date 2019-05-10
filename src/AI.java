@@ -63,7 +63,7 @@ public class AI extends Player {
 		clearScreen();
 		g.showBoard();
 		System.out.println(toString());
-		System.out.println("\n" + this.dCard.toString());
+		//System.out.println("\n" + this.dCard.toString());
 		switch (level) {
 			case EASY:
 				rollDiceAndMove();
@@ -96,6 +96,7 @@ public class AI extends Player {
 				break;
 		}
 		System.out.println("Turn End");
+		g.showBoard();
 	}
 
 	/**
@@ -250,7 +251,7 @@ public class AI extends Player {
                 }
                  */
 				suggestion.add(dCard.getRoomMCard(((RoomTile) this.position).getRoom().getName()));
-				System.out.println(Arrays.toString(suggestion.toArray()));
+				System.out.println("Suggestion = "+Arrays.toString(suggestion.toArray()));
 				break;
 			//Medium mode:
 			// AI checks the cardsToSuggest bank to see if any cards should be suggested
@@ -284,7 +285,7 @@ public class AI extends Player {
 				suggestion.add(c);
 				suggestion.add(w);
 				suggestion.add(r);
-				System.out.println(Arrays.toString(suggestion.toArray()));
+				System.out.println("Suggestion = "+Arrays.toString(suggestion.toArray()));
 				break;
 			//Hard Mode:
 			//
@@ -299,13 +300,12 @@ public class AI extends Player {
 	public void makeAccusation(ArrayList<MurderCard> accusation) {
 		System.out.println(this.name + " has made an accusation!");
 		System.out.println(Arrays.toString(accusation.toArray()));
-		System.out.println("------------------------------------------------------1");
+		System.out.println("------------------------------------------------------");
 		this.g.doAccusation(accusation);
 	}
 
 	@Override
 	public MurderCard answerSuggestion(ArrayList<MurderCard> suggestion) {
-		clearScreen();
 		System.out.println(toString());
 		ArrayList<MurderCard> matches = new ArrayList<>();
 		System.out.println("\nCalled Suggestion: " + Arrays.toString(suggestion.toArray()));
@@ -345,6 +345,8 @@ public class AI extends Player {
 
 	@Override
 	public String toString() {
+		System.out.println();
+		clearScreen();
 		String s = "AI player: " + name + "\nDiff: " + this.level.toString() + "\n" + "Location: ";
 		if (position instanceof RoomTile) {
 			s += ((RoomTile) position).getRoom().getName();

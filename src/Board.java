@@ -14,6 +14,13 @@ import java.util.*;
  * @author xxlig
  */
 class Board {
+	public static final String ANSI_RESET = "\u001B[0m";
+	public static final String ANSI_BLUE = "\u001B[34m";
+	public static final String ANSI_RED = "\u001B[31m";
+	public static final String ANSI_GREEN = "\u001B[32m";
+	public static final String ANSI_PURPLE = "\u001B[35m";
+
+
 	public ArrayList<ArrayList<Tile>> board;
 	private ArrayList<Room> rooms;
 	private ArrayList<String> roomNames;
@@ -318,19 +325,19 @@ class Board {
 		for (ArrayList line : board) {
 			for (Object tile : line) {
 				if (tileLocation.containsKey(tile)) {
-					s += "#" + tileLocation.get(tile).name.substring(1, 6) + "#";
+					s += ANSI_RED + "#" + tileLocation.get(tile).name.substring(1, 6) + "#" + ANSI_RESET;
 				} else {
 					if (tile instanceof NullTile) s += "NULL   ";
 					else if (tile instanceof RoomTile) {
-						s += "r_" + ((RoomTile) tile).getRoom().getName().substring(0, 3);
+						s += ANSI_PURPLE + "r_" + ((RoomTile) tile).getRoom().getName().substring(0, 3) + ANSI_RESET;
 						if (((RoomTile) tile).getIsDoor()) {
-							s += "D ";
+							s += ANSI_BLUE + "D " + ANSI_RESET;
 						} else if (((RoomTile) tile).getRoom().getRoomIndex() == tile) {
-							s += "I#";
+							s += ANSI_BLUE +"I#" + ANSI_RESET;
 						} else {
 							s += "  ";
 						}
-					} else if (tile instanceof SpecialTile) s += "SPEC   ";
+					} else if (tile instanceof SpecialTile) s += ANSI_GREEN + "SPEC   " + ANSI_RESET;
 					else if (tile instanceof Tile) s += "Tile   ";
 				}
 			}

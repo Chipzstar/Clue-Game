@@ -112,17 +112,17 @@ class DetectiveCard {
 
 
     public String toString(){
-        String s = "\t\tDetective Card\n=============================\n\t\tWEAPONS\n";
+        String s = "\t\tDetective Card\n=============================\n\t\tCHARACTERS\n";
+        for(MurderCard m: characters.keySet()){
+            s+= m.name+": "+ characters.get(m).toString()+"\n";
+        }
+        s+="\t\tWEAPONS\n";
         for(MurderCard m: weapons.keySet()){
-            s+= m.name+": "+ weapons.get(m).representation.toString()+"\n";
+            s+= m.name+": "+ weapons.get(m).toString()+"\n";
         }
         s+="\t\tROOMS\n";
         for(MurderCard m: rooms.keySet()){
-            s+= m.name+": "+ rooms.get(m).representation.toString()+"\n";
-        }
-        s+="\t\tCHARACTERS\n";
-        for(MurderCard m: characters.keySet()){
-            s+= m.name+": "+ characters.get(m).representation.toString()+"\n";
+            s+= m.name+": "+ rooms.get(m).toString()+"\n";
         }
         return s;
     }

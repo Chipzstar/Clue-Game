@@ -18,6 +18,13 @@ import java.util.*;
 
 public class Game implements GameInterface {
 
+	public static final String ANSI_RESET = "\u001B[0m";
+	public static final String ANSI_BLUE = "\u001B[34m";
+	public static final String ANSI_RED = "\u001B[31m";
+	public static final String ANSI_GREEN = "\u001B[32m";
+	public static final String ANSI_YELLOW = "\u001B[33m";
+	public static final String ANSI_PURPLE = "\u001B[35m";
+
 	public static void clearScreen() {
 		try {
 			new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
@@ -120,7 +127,7 @@ public class Game implements GameInterface {
 				case 5:
 					System.exit(0);
 				default:
-					System.out.println("Invalid Choice. Select Again.");
+					System.out.println("ERROR! Invalid Choice. Select Again.");
 					break;
 			}
 		}
@@ -147,21 +154,27 @@ public class Game implements GameInterface {
 		ArrayList<MurderCard> mCards;
 		initialiseIntrigue();
 		this.b = new Board();
+		this.d = new Dice(6, 2);
 		//System.out.println(b.toString());
 
 		int numPlayers, numAI = 0, diff = 0;
 		//makes sure player and ai number is between 2 and 6
 		do {
 			System.out.print("Number of Human players: ");
-			numPlayers = getInput(0, MAX_PLAYERS, "Invalid number. Try Again.");
+			numPlayers = getInput(0, MAX_PLAYERS, "ERROR! Invalid number. Try Again.");
 			if (numPlayers < MAX_PLAYERS) {
 				System.out.print("Number of AI players: ");
-				numAI = getInput(0, MAX_PLAYERS - numPlayers, "Invalid number. Try Again.");
+				numAI = getInput(0, MAX_PLAYERS, "ERROR! Invalid number. Try Again.");
 				if(numAI > 0){
 					System.out.println("Select Ai difficulty: ");
 					System.out.println("1. Easy\n2. Medium\n3. Hard");
-					diff = getInput(1, 3, "Invalid number! Please try again");
+					diff = getInput(1, 3, "ERROR! Invalid number! Please try again");
 				}
+			}
+			if(numPlayers + numAI > 6){
+				System.err.println("ERROR! Max number of players allowed is 6");
+			} else if(numPlayers + numAI <= 1){
+				System.err.println("ERROR! Min number of players allowed is 2");
 			}
 		} while (numPlayers + numAI < MIN_PLAYERS || numPlayers + numAI > MAX_PLAYERS);
 
@@ -178,7 +191,7 @@ public class Game implements GameInterface {
 				System.out.println((charNum) + "." + character);
 			}
 			System.out.print("Select Character for Player " + (i + 1) + ": ");
-			int j = getInput(1, characters.size(), "Invalid choice. Try Again.");
+			int j = getInput(1, characters.size(), "ERROR! Invalid choice. Try Again.");
 			playerList.add(new Human(characters.remove(j - 1), new HashSet<>(),
 					b.startTiles.remove(0), this, new DetectiveCard(mCards)));
 		}
@@ -198,8 +211,9 @@ public class Game implements GameInterface {
 					break;
 			}
 		}
+		//showCards(mCards);
 		deal(mCards);
-		d = new Dice(6, 2);
+		showPlayerCards();
 		playGame();
 	}
 
@@ -211,20 +225,23 @@ public class Game implements GameInterface {
 			if ("character".equals(type)) cards.add(new CharacterMCard(name));
 		});
 		int r = rand.nextInt(cards.size());
-//        System.out.println(r);
 		solution.add(cards.get(r));
 		return cards;
 	}
 
 	private void deal(ArrayList<MurderCard> cards) {
-		int highest = 0;
-		int dealer = 0;
-		int index;
+		int highest = 0, dealer = 0, index, roll;
 		cards.removeAll(solution); // removes solution cards from deck
 		for (int i = 0; i < playerList.size(); i++) {
-			if (d.roll() > highest) dealer = i;
+			roll = d.roll();
+			//System.out.println(playerList.get(i).name + " rolled a "+ roll);
+			if (roll > highest) {
+				dealer = i;
+				highest = roll;
+			}
 		}
 		index = dealer;
+		//System.out.println(ANSI_GREEN + "\n"+playerList.get(dealer).name + " is the dealer!\n" + ANSI_RESET);
 		for (MurderCard card : cards) {
 			playerList.get(index).mCards.add(card);
 			index = ++index % playerList.size();
@@ -245,7 +262,7 @@ public class Game implements GameInterface {
 		int val;
 		val = input.nextInt();
 		while (val < minVal || val > maxVal) {
-			System.out.print(message);
+			System.err.print(message);
 			System.out.print("->");
 			val = input.nextInt();
 		}
@@ -253,22 +270,23 @@ public class Game implements GameInterface {
 	}
 
 	private void playGame() {
-		System.out.println("MURDER SOLUTION CARDS: "+ Arrays.toString(solution.toArray())+"\n");
+		System.out.println(ANSI_PURPLE + "MURDER SOLUTION CARDS: "+ Arrays.toString(solution.toArray())+"\n" + ANSI_RESET);
+		border();
+		System.out.println("\t\t\t\t\t\tGAME STARTED");
+		border();
 		//Update Detective cards
 		for (Player p : playerList){
 			p.updateDetectiveCard(new ArrayList<>(p.mCards));
 		}
 		do {
-			System.out.println("****************************************************************");
-			System.out.println("\t\t\t\tTURN "+ ++counter+"#");
-			System.out.println("****************************************************************");
+			System.out.println("\nTURN "+ ++counter+"#\n");
 			playerList.get(0).doTurn();
 			System.out.println(playerList.get(0).toString());
 			Collections.rotate(playerList, 1);
 		} while (playerList.size() > 1);
-		System.out.println("\n**************************************************************************");
-		System.out.println("\t\t\t\t\t"+playerList.get(0).name + " is the WINNER");
-		System.out.println("**************************************************************************");
+		border();
+		System.out.println(ANSI_GREEN + "\t\t\t\t\t"+playerList.get(0).name + " is the WINNER" + ANSI_RESET);
+		border();
 		System.out.println("MURDER SOLUTION CARDS: "+ Arrays.toString(solution.toArray())+"\n");
 	}
 
@@ -283,8 +301,7 @@ public class Game implements GameInterface {
 			}
 		}
 		cardsRevealed.removeIf(Objects::isNull);
-		System.out.println("Revealed Cards: " + cardsRevealed.size());
-		System.out.println(Arrays.toString(cardsRevealed.toArray()));
+		System.out.println("Revealed Cards: " + cardsRevealed.size() + " -> " + Arrays.toString(cardsRevealed.toArray()));
 		for (int i = 0; i < playerList.size(); i++) {
 			playerList.get(i).revealCards(cardsRevealed, suggestion);
 		}
@@ -307,8 +324,9 @@ public class Game implements GameInterface {
 				}
 			}
 		} else {
-			System.out.println(playerList.get(0).name +
-					" has guessed incorrectly and has been removed from the game");
+			border();
+			System.out.println(ANSI_RED + playerList.get(0).name + " guessed incorrectly!\n"+playerList.get(0).name + " removed from the game" + ANSI_RESET);
+			border();
 			playerList.remove(0);
 			Collections.rotate(playerList, -1);
 		}
@@ -316,6 +334,24 @@ public class Game implements GameInterface {
 
 	public void showBoard() {
 		System.out.print(b.toStringWithPlayers(playerList));
+	}
+
+	/*private void showCards(ArrayList<MurderCard> cards){
+		DetectiveCard d = new DetectiveCard(cards);
+		System.out.println(ANSI_YELLOW + "\nAll Character cards: "+Arrays.toString(d.getCharacterMCards().toArray())+ ANSI_RESET);
+		System.out.println(ANSI_YELLOW + "All Weapon cards: " +Arrays.toString(d.getWeaponMCards().toArray())+ ANSI_RESET);
+		System.out.println(ANSI_YELLOW + "All Room cards:" + Arrays.toString(d.getRoomMCards().toArray()) + ANSI_RESET);
+	}*/
+
+	private void showPlayerCards(){
+		int counter = 0;
+		for (Player p : playerList) {
+			System.out.println(ANSI_YELLOW + "Player "+ ++counter + " Hand: "+ Arrays.toString(p.mCards.toArray()) + ANSI_RESET);
+		}
+	}
+
+	private void border(){
+		System.out.println(ANSI_BLUE +"*******************************************************************" + ANSI_RESET);
 	}
 
 	public static void main(String[] args) throws IOException {

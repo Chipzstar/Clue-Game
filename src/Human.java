@@ -59,30 +59,12 @@ public class Human extends Player {
 
 	@Override
 	public void doTurn() {
-		clearScreen();
 		g.showBoard();
+		clearScreen();
 		System.out.println(toString());
 		System.out.println(this.dCard.toString());
 		makeMove();
 		clearScreen();
-		System.out.println(toString());
-
-		//do suggestion
-		if (this.position instanceof SpecialTile) {
-			this.drawIntrigue();
-		} else if (this.position instanceof RoomTile) {
-			System.out.println("Do you want to make a suggestion?");
-			System.out.println("1: yes");
-			System.out.println("2: no");
-			switch (getInput(2)) {
-				case 0:
-					makeSuggestion();
-					break;
-				case 1:
-					System.out.println("no suggestion");
-					break;
-			}
-		}
 		System.out.println(this.toString());
 		System.out.println(this.dCard.toString());
 		System.out.println("Do you want to make a Accusation");
@@ -106,11 +88,8 @@ public class Human extends Player {
 				System.out.println("no Accusation");
 				break;
 		}
-		System.out.println("TurnEnd");
-
-		//do accusation
-
-
+		g.showBoard();
+		System.out.println("\nTurn End");
 	}
 
     @Override
@@ -149,6 +128,21 @@ public class Human extends Player {
 		switch (choice) {
 			case 0:
 				rollDiceAndMove();
+				if (this.position instanceof SpecialTile) {
+					this.drawIntrigue();
+				} else if (this.position instanceof RoomTile) {
+					System.out.println("Do you want to make a suggestion?");
+					System.out.println("1: yes");
+					System.out.println("2: no");
+					switch (getInput(2)) {
+						case 0:
+							makeSuggestion();
+							break;
+						case 1:
+							System.out.println("no suggestion made");
+							break;
+					}
+				}
 				break;
 			case 1:
 				System.out.println("staying");
@@ -178,7 +172,8 @@ public class Human extends Player {
 	 *
 	 */
 	public void useShortcut() {
-		this.position = ((RoomTile) this.position).getRoom().getShortcut().getRoomIndex();
+		System.out.println(this.name + " has used Shortcut: " + ((RoomTile) this.position).getRoom().getName()+" -> "+((RoomTile) this.position).getRoom().getShortcut().getName());
+		setPosition(((RoomTile) this.position).getRoom().getShortcut().getRoomIndex());
 	}
 
 	/**
@@ -234,6 +229,9 @@ public class Human extends Player {
 		System.out.print("Selection: ");
 		accusation.add(temp.get(getInput(temp.size() - 1)));
 
+		System.out.println(this.name + " has made an accusation!");
+		System.out.println(Arrays.toString(accusation.toArray()));
+		System.out.println("------------------------------------------------------");
 		g.doAccusation(accusation);
 	}
 
