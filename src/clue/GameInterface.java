@@ -32,7 +32,4 @@ public interface GameInterface {
     * fill player list with corresponding objects
     * Game Start
     **/
-
-
-
 }

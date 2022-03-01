@@ -34,7 +34,7 @@ class Room {
      * @return
      */
     public boolean setShortcut(Room r){
-        if(this.shortcut ==null){
+        if(this.shortcut == null){
                 this.shortcut = r;
                 return true;
         }

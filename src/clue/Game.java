@@ -11,10 +11,19 @@ import java.util.List;
 
 
 public class Game implements GameInterface {
-    Board b = null;
-    Dice d = null;
-    ArrayList<Player> playerList;
-    LinkedList<MurderCard> solution;
-    LinkedList<IntrigueCard> intrigueDeck;
-    int currentPlayer;
+	Board b = null;
+	Dice d = null;
+	protected ArrayList<Player> playerList;
+	protected LinkedList<MurderCard> solution;
+	protected LinkedList<IntrigueCard> intrigueDeck;
+	protected MurderCard revealedCard = null;
+	int currentPlayer;
+
+	public void setRevealedCard(MurderCard revealedCard) {
+		this.revealedCard = revealedCard;
+	}
+
+	public MurderCard getRevealedCard() {
+		return revealedCard;
+	}
 }

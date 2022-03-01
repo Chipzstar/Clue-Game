@@ -23,16 +23,15 @@ public class Human extends Player{
      * @param name
      * @param mCards
      * @param t
-     * @param g
      * @param d
      */
-    public Human(String name, Set<MurderCard> mCards, Tile t, Game g, DetectiveCard d){
+    public Human(String name, Set<MurderCard> mCards, Tile t, DetectiveCard d){
         this.name = name;
         this.mCards = mCards;
         this.position = t;
         this.dCard = d;
         this.immuneToSuggestion = false;
-        Scanner input = new Scanner(System.in);
+        input = new Scanner(System.in);
     }
 
     /**
@@ -40,7 +39,7 @@ public class Human extends Player{
      * @param maxVal
      * @return
      */
-    private int getInput (int maxVal){
+    public int getInput (int maxVal){
         int val= -1;
         while(val<0||val>maxVal){
             val = input.nextInt()-1;
@@ -53,13 +52,16 @@ public class Human extends Player{
      */
     public void rollDiceAndMove(){
         int roll = this.g.d.roll();
-        ArrayList<Tile> moveTo = this.g.b.humanDiceRoll(roll, this.position);
-        for(int i=0; i<moveTo.size();i++){
-            System.out.println(i +": "+moveTo.get(i).toString());
+        ArrayList<Tile> accessibleTiles = this.g.b.getReachableTiles(roll, this.position);
+        for(int i = 0; i<accessibleTiles.size();i++){
+            System.out.println(i +": "+accessibleTiles.get(i).toString());
         }
-        this.position = moveTo.get(getInput(moveTo.size()-1));
+        setPosition(accessibleTiles.get(getInput(accessibleTiles.size()-1)));
         if(this.position instanceof SpecialTile){
             drawIntrigue();
+        }
+        if(this.position instanceof RoomTile){
+            setPosition(((RoomTile) this.position).getRoom().getRoomIndex());
         }
     }
 
@@ -81,6 +83,7 @@ public class Human extends Player{
         ArrayList<MurderCard> temp = dCard.getWeaponMCards();
         System.out.println("Select Weapon");
         displayDetectiveCardItems(temp);
+        System.out.print("Selection: ");
         suggestion.add(temp.get(getInput(temp.size()-1)));
 
         //ROOM - gets roomMCard of current room player is in
@@ -90,6 +93,7 @@ public class Human extends Player{
         temp = dCard.getCharacterMCards();
         System.out.println("Select Character");
         displayDetectiveCardItems(temp);
+        System.out.print("Selection: ");
         suggestion.add(temp.get(getInput(temp.size()-1)));
         
         return suggestion;
@@ -105,23 +109,23 @@ public class Human extends Player{
 
         //WEAPONS
         temp = dCard.getWeaponMCards();
-        System.out.println("Select Weapon");
+        System.out.println("Select a Weapon");
         displayDetectiveCardItems(temp);
-        System.out.println("Selection: ");
+        System.out.print("Selection: ");
         accusation.add(temp.get(getInput(temp.size()-1)));
 
         //ROOMS
         temp = dCard.getRoomMCards();
-        System.out.println("Select Room");
+        System.out.println("Select a Room");
         displayDetectiveCardItems(temp);
-        System.out.println("Selection: ");
+        System.out.print("Selection: ");
         accusation.add(temp.get(getInput(temp.size()-1)));
 
         //CHARACTERS
         temp = dCard.getCharacterMCards();
-        System.out.println("Select Character");
+        System.out.println("Select a Character");
         displayDetectiveCardItems(temp);
-        System.out.println("Selection: ");
+        System.out.print("Selection: ");
         accusation.add(temp.get(getInput(temp.size()-1)));
 
         return accusation;
@@ -134,34 +138,6 @@ public class Human extends Player{
     private void displayDetectiveCardItems(ArrayList<MurderCard> items){
         for(int i = 0; i<items.size(); i++){
             System.out.println(++i +": " +items.get(i).getName());
-        }
-    }
-
-    /**
-     *
-     */
-    public void drawIntrigue(){
-        IntrigueCard c = this.g.intrigueDeck.poll();
-        this.g.intrigueDeck.offer(c);
-        switch(c.getType()){
-            case AVOIDSUGGESTION:
-                this.immuneToSuggestion = true;
-                break;
-            case EXTRATURN:
-                g.currentPlayer--;
-                break;
-            case THROWAGAIN:
-                rollDiceAndMove();
-            case TELEPORT:
-                int x,y;
-                do{
-                    g.b.board.toString();
-                    System.out.println("please enter x");
-                    x = getInput(this.g.b.board.size()-1);
-                    System.out.println("please enter y");
-                    y = getInput(this.g.b.board.get(0).size()-1);
-                }while(this.g.b.landableTile(this.g.b.board.get(x).get(y)));
-                this.position = this.g.b.board.get(x).get(y);
         }
     }
 
@@ -186,7 +162,6 @@ public class Human extends Player{
                 immuneToSuggestion = false;
                 return null;
             } else {
-                //return random match, can be choosen, but will be implemented later
                 System.out.println("Cards matched with suggestion are:");
                 for(int i = 0; i<matches.size(); i++){
                     System.out.println(i +"  "+matches.get(i).name + " "+ matches.get(i).getClass().getName());

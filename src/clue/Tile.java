@@ -40,13 +40,13 @@ class RoomTile extends Tile{
         this.isDoor = b;
         if(this.isDoor){
             if(!r.addDoor(this)){
-                System.out.println(this+" already been added to doors in "+r);
+                System.out.println(this+" already been added to doors in "+r.getName());
             }    
         }  
     }
     
-    public Room getRoom(){return r;}
-    public boolean getIsDoor(){return isDoor;}
+    public Room getRoom(){return this.r;}
+    public boolean isDoor(){return this.isDoor;}
     
 }
 
@@ -60,5 +60,4 @@ class NullTile extends Tile{
     public NullTile(int x, int y) {
         super(x, y);
     }
-    
 }

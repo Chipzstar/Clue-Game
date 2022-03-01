@@ -11,6 +11,7 @@ import java.util.Random;
  * @author xxlig
  */
 public class Dice {
+
     private Random randomGenerator = new Random();
     private int sides;
     private int noOfDie;
